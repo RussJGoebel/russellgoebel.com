@@ -1,0 +1,25 @@
+/* css styles */
+/* Typography */
+body {
+  font-family: "Georgia", serif;
+  line-height: 1.7;
+}
+
+/* Slightly constrain content width for readability */
+.content {
+  max-width: 750px;
+}
+
+/* Warm up the heading color slightly */
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+/* Nice subtle link style */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

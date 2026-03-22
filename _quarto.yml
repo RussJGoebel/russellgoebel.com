@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  title: "Russell Goebel"
+  navbar:
+    title: "Russell Goebel"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: posts.qmd
+        text: Writing
+  page-footer:
+    left: "© Russell Goebel 2026"
+    right: "Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true

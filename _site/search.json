@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m a statistician based in Boston with a PhD in Statistics from Boston University and a background in statistical consulting and graduate research. I’m interested in the foundations of statistical inference and what it actually means to draw valid conclusions from data.\nI think a lot about epistemology — not in an abstract philosophical way, but in a practical sense: how do we know what we know, and how often are we fooling ourselves?\nThis site is where I write about statistics and whatever else I’m thinking about."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Russell Goebel",
+    "section": "",
+    "text": "I’m a statistician with a background in consulting and academic research. I care about epistemology, rigor, and the gap between how statistics is taught and how it’s actually practiced.\nThis site is where I think out loud — about statistical methods, data analysis, and occasionally other things.\nAbout me | Writing"
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
+    "section": "Background",
+    "text": "Background\n\nPhD in Statistics, Boston University\nExperience in statistical consulting across applied domains\nMethods: Bayesian inference, regression modeling, experimental design, and mixed models"
+  },
+  {
+    "objectID": "about.html#contact",
+    "href": "about.html#contact",
+    "title": "About",
+    "section": "Contact",
+    "text": "Contact\nYou can reach me at [your email] or find me on LinkedIn and GitHub."
+  },
+  {
+    "objectID": "posts/first-post.html",
+    "href": "posts/first-post.html",
+    "title": "First Post",
+    "section": "",
+    "text": "Just getting started."
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Writing",
+    "section": "",
+    "text": "First Post\n\n\n\n\n\n\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\nNo matching items"
+  }
+]
