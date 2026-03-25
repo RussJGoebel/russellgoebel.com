@@ -1,0 +1,37 @@
+---
+title: "Cross-Validation for Spatial Downscaling"
+date: 2026-03-22
+description: "Why spatial blocking isn't always the right choice for cross-validation, and what observation density has to do with it"
+categories: [spatial statistics, cross-validation, methodology]
+---
+
+## The problem
+
+Cross-validation in spatial data is tricky. The standard advice is to 
+use spatially blocked folds to avoid optimistic estimates from spatial 
+autocorrelation — but that advice doesn't always apply.
+
+## Simple random CV
+
+[Standard k-fold CV, soundings assigned randomly to folds]
+
+## Spatially blocked CV
+
+[K-means blocking — what it is, how it works, why people prefer it 
+for spatial data]
+
+## Why observation density changes the calculus
+
+[The key argument: in the downscaling setting, what you're evaluating 
+is how well the model recovers the latent field given overlapping 
+footprints. Spatially blocking removes the dense overlap that the 
+model actually relies on, making CV overly pessimistic. Simple random 
+CV better reflects the real prediction task.]
+
+## In SpatialBasis
+
+[How to run both, how to compare them]
+
+## Example
+
+[Code demonstrating both approaches, comparison of results]

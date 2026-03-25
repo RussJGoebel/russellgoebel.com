@@ -1,0 +1,14 @@
+---
+title: "Adjusting the Correlation Structure with Covariates"
+date: 2026-03-22
+description: "How land cover information can modify spatial neighborhood structure in the SAR prior"
+categories: [spatial statistics, downscaling, bayesian]
+---
+  
+  ## The problem
+  
+  ## The idea
+  
+  ## In SpatialBasis
+  
+  ## Example

@@ -25,7 +25,21 @@
     "href": "index.html",
     "title": "Russell Goebel",
     "section": "",
-    "text": "I’m a statistician with a background in consulting and academic research. I care about epistemology, rigor, and the gap between how statistics is taught and how it’s actually practiced.\nThis site is where I think out loud — about statistical methods, data analysis, and occasionally other things.\nAbout me | Writing"
+    "text": "I’m a statistician with a background in consulting and academic research. I care about epistemology, rigor, and the gap between how statistics is taught and how it’s actually practiced.\nThis site is where I think out loud — about statistical methods, data analysis, and occasionally other things."
+  },
+  {
+    "objectID": "index.html#recent-writing",
+    "href": "index.html#recent-writing",
+    "title": "Russell Goebel",
+    "section": "Recent Writing",
+    "text": "Recent Writing\n\n\n\n\n  \n\n\n\n\nFirst Post\n\n\n\n\n\n\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nAdjusting the Correlation Structure with Covariates\n\n\n\n\n\nHow land cover information can modify spatial neighborhood structure in the SAR prior\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nAggregating Covariates in Spatial Downscaling\n\n\n\n\n\nHow covariates get aggregated to coarse observation footprints, and why the same change-of-support operator handles both covariates and the latent field\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#featured-project",
+    "href": "index.html#featured-project",
+    "title": "Russell Goebel",
+    "section": "Featured Project",
+    "text": "Featured Project\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/first-post.html",
@@ -39,6 +53,265 @@
     "href": "posts.html",
     "title": "Writing",
     "section": "",
-    "text": "First Post\n\n\n\n\n\n\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "First Post\n\n\n\n\n\n\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nAdjusting the Correlation Structure with Covariates\n\n\n\n\n\nHow land cover information can modify spatial neighborhood structure in the SAR prior\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nAggregating Covariates in Spatial Downscaling\n\n\n\n\n\nHow covariates get aggregated to coarse observation footprints, and why the same change-of-support operator handles both covariates and the latent field\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nCross-Validation for Spatial Downscaling\n\n\n\n\n\nWhy spatial blocking isn’t always the right choice for cross-validation, and what observation density has to do with it\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nThe Sensor Footprint Function\n\n\n\n\n\nHow satellite observations are modeled as weighted averages of an underlying spatial field, and why the weighting function matters\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nSpatial Confounding\n\n\n\n\n\nWhy spatial structure in your data can silently bias your estimates\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html",
+    "href": "projects/spatialbasis/cross-validation.html",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "",
+    "text": "Cross-validation in spatial data is tricky. The standard advice is to use spatially blocked folds to avoid optimistic estimates from spatial autocorrelation — but that advice doesn’t always apply."
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html#the-problem",
+    "href": "projects/spatialbasis/cross-validation.html#the-problem",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "",
+    "text": "Cross-validation in spatial data is tricky. The standard advice is to use spatially blocked folds to avoid optimistic estimates from spatial autocorrelation — but that advice doesn’t always apply."
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html#simple-random-cv",
+    "href": "projects/spatialbasis/cross-validation.html#simple-random-cv",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Simple random CV",
+    "text": "Simple random CV\n[Standard k-fold CV, soundings assigned randomly to folds]"
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html#spatially-blocked-cv",
+    "href": "projects/spatialbasis/cross-validation.html#spatially-blocked-cv",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Spatially blocked CV",
+    "text": "Spatially blocked CV\n[K-means blocking — what it is, how it works, why people prefer it for spatial data]"
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html#why-observation-density-changes-the-calculus",
+    "href": "projects/spatialbasis/cross-validation.html#why-observation-density-changes-the-calculus",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Why observation density changes the calculus",
+    "text": "Why observation density changes the calculus\n[The key argument: in the downscaling setting, what you’re evaluating is how well the model recovers the latent field given overlapping footprints. Spatially blocking removes the dense overlap that the model actually relies on, making CV overly pessimistic. Simple random CV better reflects the real prediction task.]"
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html#in-spatialbasis",
+    "href": "projects/spatialbasis/cross-validation.html#in-spatialbasis",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis\n[How to run both, how to compare them]"
+  },
+  {
+    "objectID": "projects/spatialbasis/cross-validation.html#example",
+    "href": "projects/spatialbasis/cross-validation.html#example",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Example",
+    "text": "Example\n[Code demonstrating both approaches, comparison of results]"
+  },
+  {
+    "objectID": "projects/spatialbasis/g-function.html",
+    "href": "projects/spatialbasis/g-function.html",
+    "title": "The Sensor Footprint Function",
+    "section": "",
+    "text": "## The problem\nSatellite sensors don’t measure a single point — they measure a blurry weighted average over a region of the earth’s surface. The shape of that blur matters."
+  },
+  {
+    "objectID": "projects/spatialbasis/g-function.html#the-idea",
+    "href": "projects/spatialbasis/g-function.html#the-idea",
+    "title": "The Sensor Footprint Function",
+    "section": "The idea",
+    "text": "The idea\nEach observation \\(y_i\\) is modeled as:\n\\[y_i = \\frac{1}{|D_i|}\\int_{D_i} g_i(s) v(s) \\, ds + \\varepsilon_i\\]\nwhere \\(g_i(s)\\) is the footprint response function — for OCO-2, approximately a super-Gaussian describing the sensor’s sensitivity across its footprint."
+  },
+  {
+    "objectID": "projects/spatialbasis/g-function.html#in-spatialbasis",
+    "href": "projects/spatialbasis/g-function.html#in-spatialbasis",
+    "title": "The Sensor Footprint Function",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis\n[How the package handles footprint specification]"
+  },
+  {
+    "objectID": "projects/spatialbasis/g-function.html#example",
+    "href": "projects/spatialbasis/g-function.html#example",
+    "title": "The Sensor Footprint Function",
+    "section": "Example",
+    "text": "Example\n[Code example]"
+  },
+  {
+    "objectID": "projects/spatialbasis/index.html",
+    "href": "projects/spatialbasis/index.html",
+    "title": "SpatialBasis",
+    "section": "",
+    "text": "Landing page for the SpatialBasis project. More coming soon."
+  },
+  {
+    "objectID": "projects/spatialbasis/spatial-confounding.html#the-idea",
+    "href": "projects/spatialbasis/spatial-confounding.html#the-idea",
+    "title": "Spatial Confounding",
+    "section": "The idea",
+    "text": "The idea"
+  },
+  {
+    "objectID": "projects/spatialbasis/spatial-confounding.html#in-spatialbasis",
+    "href": "projects/spatialbasis/spatial-confounding.html#in-spatialbasis",
+    "title": "Spatial Confounding",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis"
+  },
+  {
+    "objectID": "projects/spatialbasis/spatial-confounding.html#example",
+    "href": "projects/spatialbasis/spatial-confounding.html#example",
+    "title": "Spatial Confounding",
+    "section": "Example",
+    "text": "Example"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "SpatialBasis\n\n\nA statistical downscaling package for spatial data in R\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/spatialbasis/index.html#posts",
+    "href": "projects/spatialbasis/index.html#posts",
+    "title": "SpatialBasis",
+    "section": "Posts",
+    "text": "Posts\n\n\n\n\n  \n\n\n\n\nAdjusting the Correlation Structure with Covariates\n\n\n\n\n\nHow land cover information can modify spatial neighborhood structure in the SAR prior\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nAggregating Covariates in Spatial Downscaling\n\n\n\n\n\nHow covariates get aggregated to coarse observation footprints, and why the same change-of-support operator handles both covariates and the latent field\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nCross-Validation for Spatial Downscaling\n\n\n\n\n\nWhy spatial blocking isn’t always the right choice for cross-validation, and what observation density has to do with it\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nThe Sensor Footprint Function\n\n\n\n\n\nHow satellite observations are modeled as weighted averages of an underlying spatial field, and why the weighting function matters\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\n  \n\n\n\n\nSpatial Confounding\n\n\n\n\n\nWhy spatial structure in your data can silently bias your estimates\n\n\n\n\n\n\nMar 22, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/correlation-structure.html",
+    "href": "projects/spatialbasis/posts/correlation-structure.html",
+    "title": "Adjusting the Correlation Structure with Covariates",
+    "section": "",
+    "text": "## The problem\n## The idea\n## In SpatialBasis\n## Example"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/covariates.html",
+    "href": "projects/spatialbasis/posts/covariates.html",
+    "title": "Aggregating Covariates in Spatial Downscaling",
+    "section": "",
+    "text": "## The problem\nDownscaling is hard because going from coarse to fine is underdetermined. But aggregating a covariate from fine to coarse is well-posed — it’s just a weighted average. This asymmetry is worth understanding."
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/covariates.html#how-covariate-aggregation-works",
+    "href": "projects/spatialbasis/posts/covariates.html#how-covariate-aggregation-works",
+    "title": "Aggregating Covariates in Spatial Downscaling",
+    "section": "How covariate aggregation works",
+    "text": "How covariate aggregation works\n[The key idea: a high-resolution covariate like landcover can be averaged down to the observation footprint straightforwardly, using weighted averages over the footprint geometry]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/covariates.html#the-a-matrix-connection",
+    "href": "projects/spatialbasis/posts/covariates.html#the-a-matrix-connection",
+    "title": "Aggregating Covariates in Spatial Downscaling",
+    "section": "The A matrix connection",
+    "text": "The A matrix connection\n[The elegant result: the same change-of-support operator A from the residual discretization provides a consistency-preserving approximation to covariate aggregation. So you don’t need a separate aggregation scheme — the geometry is already encoded in A]\n\\[X^{(o)} \\approx A X^{(\\ell)}\\]\n## Why this matters practically\n[You can exploit high-resolution covariates without paying the computational cost of a fine latent grid. The two discretizations — fine for covariates, coarser for the residual — can be handled separately and cleanly]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/covariates.html#in-spatialbasis",
+    "href": "projects/spatialbasis/posts/covariates.html#in-spatialbasis",
+    "title": "Aggregating Covariates in Spatial Downscaling",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis\n[How to pass covariates, what resolution they should be at]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/covariates.html#example",
+    "href": "projects/spatialbasis/posts/covariates.html#example",
+    "title": "Aggregating Covariates in Spatial Downscaling",
+    "section": "Example",
+    "text": "Example\n[Code example with a real covariate]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html",
+    "href": "projects/spatialbasis/posts/cross-validation.html",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "",
+    "text": "Cross-validation in spatial data is tricky. The standard advice is to use spatially blocked folds to avoid optimistic estimates from spatial autocorrelation — but that advice doesn’t always apply."
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html#the-problem",
+    "href": "projects/spatialbasis/posts/cross-validation.html#the-problem",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "",
+    "text": "Cross-validation in spatial data is tricky. The standard advice is to use spatially blocked folds to avoid optimistic estimates from spatial autocorrelation — but that advice doesn’t always apply."
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html#simple-random-cv",
+    "href": "projects/spatialbasis/posts/cross-validation.html#simple-random-cv",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Simple random CV",
+    "text": "Simple random CV\n[Standard k-fold CV, soundings assigned randomly to folds]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html#spatially-blocked-cv",
+    "href": "projects/spatialbasis/posts/cross-validation.html#spatially-blocked-cv",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Spatially blocked CV",
+    "text": "Spatially blocked CV\n[K-means blocking — what it is, how it works, why people prefer it for spatial data]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html#why-observation-density-changes-the-calculus",
+    "href": "projects/spatialbasis/posts/cross-validation.html#why-observation-density-changes-the-calculus",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Why observation density changes the calculus",
+    "text": "Why observation density changes the calculus\n[The key argument: in the downscaling setting, what you’re evaluating is how well the model recovers the latent field given overlapping footprints. Spatially blocking removes the dense overlap that the model actually relies on, making CV overly pessimistic. Simple random CV better reflects the real prediction task.]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html#in-spatialbasis",
+    "href": "projects/spatialbasis/posts/cross-validation.html#in-spatialbasis",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis\n[How to run both, how to compare them]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/cross-validation.html#example",
+    "href": "projects/spatialbasis/posts/cross-validation.html#example",
+    "title": "Cross-Validation for Spatial Downscaling",
+    "section": "Example",
+    "text": "Example\n[Code demonstrating both approaches, comparison of results]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/g-function.html",
+    "href": "projects/spatialbasis/posts/g-function.html",
+    "title": "The Sensor Footprint Function",
+    "section": "",
+    "text": "## The problem\nSatellite sensors don’t measure a single point — they measure a blurry weighted average over a region of the earth’s surface. The shape of that blur matters."
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/g-function.html#the-idea",
+    "href": "projects/spatialbasis/posts/g-function.html#the-idea",
+    "title": "The Sensor Footprint Function",
+    "section": "The idea",
+    "text": "The idea\nEach observation \\(y_i\\) is modeled as:\n\\[y_i = \\frac{1}{|D_i|}\\int_{D_i} g_i(s) v(s) \\, ds + \\varepsilon_i\\]\nwhere \\(g_i(s)\\) is the footprint response function — for OCO-2, approximately a super-Gaussian describing the sensor’s sensitivity across its footprint."
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/g-function.html#in-spatialbasis",
+    "href": "projects/spatialbasis/posts/g-function.html#in-spatialbasis",
+    "title": "The Sensor Footprint Function",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis\n[How the package handles footprint specification]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/g-function.html#example",
+    "href": "projects/spatialbasis/posts/g-function.html#example",
+    "title": "The Sensor Footprint Function",
+    "section": "Example",
+    "text": "Example\n[Code example]"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/spatial-confounding.html#the-idea",
+    "href": "projects/spatialbasis/posts/spatial-confounding.html#the-idea",
+    "title": "Spatial Confounding",
+    "section": "The idea",
+    "text": "The idea"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/spatial-confounding.html#in-spatialbasis",
+    "href": "projects/spatialbasis/posts/spatial-confounding.html#in-spatialbasis",
+    "title": "Spatial Confounding",
+    "section": "In SpatialBasis",
+    "text": "In SpatialBasis"
+  },
+  {
+    "objectID": "projects/spatialbasis/posts/spatial-confounding.html#example",
+    "href": "projects/spatialbasis/posts/spatial-confounding.html#example",
+    "title": "Spatial Confounding",
+    "section": "Example",
+    "text": "Example"
   }
 ]

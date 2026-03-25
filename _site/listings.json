@@ -1,8 +1,40 @@
 [
   {
+    "listing": "/index.html",
+    "items": [
+      "/posts/first-post.html",
+      "/projects/spatialbasis/posts/correlation-structure.html",
+      "/projects/spatialbasis/posts/covariates.html",
+      "/projects/spatialbasis/posts/cross-validation.html",
+      "/projects/spatialbasis/posts/g-function.html",
+      "/projects/spatialbasis/posts/spatial-confounding.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
-      "/posts/first-post.html"
+      "/posts/first-post.html",
+      "/projects/spatialbasis/posts/correlation-structure.html",
+      "/projects/spatialbasis/posts/covariates.html",
+      "/projects/spatialbasis/posts/cross-validation.html",
+      "/projects/spatialbasis/posts/g-function.html",
+      "/projects/spatialbasis/posts/spatial-confounding.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/spatialbasis/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/spatialbasis/index.html",
+    "items": [
+      "/projects/spatialbasis/posts/correlation-structure.html",
+      "/projects/spatialbasis/posts/covariates.html",
+      "/projects/spatialbasis/posts/cross-validation.html",
+      "/projects/spatialbasis/posts/g-function.html",
+      "/projects/spatialbasis/posts/spatial-confounding.html"
     ]
   }
 ]

@@ -1,7 +1,17 @@
 {
   "listingMap": {
+    "index.qmd": [
+      "posts",
+      "projects/spatialBasis/index.qmd"
+    ],
     "posts.qmd": [
       "posts"
+    ],
+    "projects.qmd": [
+      "projects/*/index.qmd"
+    ],
+    "projects\\spatialbasis\\index.qmd": [
+      "posts/*.qmd"
     ]
   }
 }

@@ -1,0 +1,14 @@
+---
+title: "Quasi-monte-carlo"
+date: 2026-03-22
+description: "Implementation of Quasi-monte-carlo methods to sf data"
+categories: [spatial statistics, downscaling, bayesian]
+---
+  
+  ## The problem
+  
+  ## The idea
+  
+  ## In SpatialBasis
+  
+  ## Example

@@ -10,5 +10,35 @@
   },
   "posts.qmd": {
     "posts.html": "92ce051b"
+  },
+  "projects/spatialbasis/index.qmd": {
+    "index.html": "22fd53af"
+  },
+  "projects.qmd": {
+    "projects.html": "9fe9fc30"
+  },
+  "projects/spatialbasis/cross-validation.qmd": {
+    "cross-validation.html": "0c80c73d"
+  },
+  "projects/spatialbasis/g-function.qmd": {
+    "g-function.html": "45ac5157"
+  },
+  "projects/spatialbasis/spatial-confounding.qmd": {
+    "spatial-confounding.html": "95dc3307"
+  },
+  "projects/spatialbasis/posts/correlation-structure.qmd": {
+    "correlation-structure.html": "deeec81b"
+  },
+  "projects/spatialbasis/posts/covariates.qmd": {
+    "covariates.html": "184d3e8f"
+  },
+  "projects/spatialbasis/posts/cross-validation.qmd": {
+    "cross-validation.html": "a01ce8e6"
+  },
+  "projects/spatialbasis/posts/g-function.qmd": {
+    "g-function.html": "4b2049b4"
+  },
+  "projects/spatialbasis/posts/spatial-confounding.qmd": {
+    "spatial-confounding.html": "62cd324e"
   }
 }

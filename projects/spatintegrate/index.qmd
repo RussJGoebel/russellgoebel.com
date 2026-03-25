@@ -1,0 +1,17 @@
+---
+title: "spatintegrate"
+date: "2026-03-22"
+description: "A package for summarizing and numeric integration of deterministic functions over sf polygons"
+listing:
+  - id: project-posts
+    contents: "posts/*.qmd"
+    sort: "date desc"
+    type: default
+---
+
+Landing page for the spatintegrate project. More coming soon.
+
+## Posts
+
+::: {#project-posts}
+:::

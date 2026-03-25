@@ -1,0 +1,30 @@
+---
+title: "The Sensor Footprint Function"
+date: 2026-03-22
+description: "How satellite observations are modeled as weighted averages of an underlying spatial field, and why the weighting function matters"
+categories: [spatial statistics, remote sensing, downscaling]
+---
+  
+  ## The problem
+  
+  Satellite sensors don't measure a single point — they measure a blurry 
+weighted average over a region of the earth's surface. The shape of that 
+blur matters.
+
+## The idea
+
+Each observation $y_i$ is modeled as:
+  
+  $$y_i = \frac{1}{|D_i|}\int_{D_i} g_i(s) v(s) \, ds + \varepsilon_i$$
+  
+  where $g_i(s)$ is the footprint response function — for OCO-2, 
+approximately a super-Gaussian describing the sensor's sensitivity 
+across its footprint.
+
+## In SpatialBasis
+
+[How the package handles footprint specification]
+
+## Example
+
+[Code example]

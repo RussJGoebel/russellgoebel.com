@@ -1,0 +1,17 @@
+---
+title: "SpatialBasis"
+date: "2026-03-22"
+description: "A statistical downscaling package for spatial data in R"
+listing:
+  - id: project-posts
+    contents: "posts/*.qmd"
+    sort: "date desc"
+    type: default
+---
+
+Landing page for the SpatialBasis project. More coming soon.
+
+## Posts
+
+::: {#project-posts}
+:::

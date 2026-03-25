@@ -1,0 +1,42 @@
+---
+title: "Aggregating Covariates in Spatial Downscaling"
+date: 2026-03-22
+description: "How covariates get aggregated to coarse observation footprints, and why the same change-of-support operator handles both covariates and the latent field"
+categories: [spatial statistics, downscaling, covariates]
+---
+  
+  ## The problem
+  
+  Downscaling is hard because going from coarse to fine is underdetermined.
+But aggregating a covariate from fine to coarse is well-posed — it's 
+just a weighted average. This asymmetry is worth understanding.
+
+## How covariate aggregation works
+
+[The key idea: a high-resolution covariate like landcover can be 
+averaged down to the observation footprint straightforwardly, using 
+weighted averages over the footprint geometry]
+
+## The A matrix connection
+
+[The elegant result: the same change-of-support operator A from the 
+residual discretization provides a consistency-preserving approximation 
+to covariate aggregation. So you don't need a separate aggregation 
+scheme — the geometry is already encoded in A]
+
+$$X^{(o)} \approx A X^{(\ell)}$$
+  
+  ## Why this matters practically
+  
+  [You can exploit high-resolution covariates without paying the 
+   computational cost of a fine latent grid. The two discretizations 
+   — fine for covariates, coarser for the residual — can be handled 
+   separately and cleanly]
+
+## In SpatialBasis
+
+[How to pass covariates, what resolution they should be at]
+
+## Example
+
+[Code example with a real covariate]

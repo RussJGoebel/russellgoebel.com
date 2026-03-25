@@ -1,0 +1,14 @@
+---
+title: "Spatial Confounding"
+date: 2026-03-22
+description: "Why spatial structure in your data can silently bias your estimates"
+categories: [spatial statistics, confounding, methodology]
+---
+
+## The problem
+
+## The idea
+
+## In SpatialBasis
+
+## Example
