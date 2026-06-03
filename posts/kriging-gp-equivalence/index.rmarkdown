@@ -12,6 +12,8 @@ number-sections: true
 bibliography: reference.bib
 ---
 
+
+
 # Introduction
 
 ## Kriging as Bayesian Linear Regression
@@ -604,6 +606,8 @@ Popular kriging textbooks distinguish between the Gaussian and non-Gaussian case
 
 There is a straightforward answer to this that goes like this: The best linear unbiased estimator is, under the Gaussian assumption, the best unbiased estimator. Kriging is almost always formulated as the BLUE estimator, while GP regression almost always is formulated as a posterior mean or the Best Unbiased Estimator under the Gaussian assumption. These coincide.
 
+
+
 ```{mermaid}
 %%| echo: false
 flowchart TD
@@ -621,6 +625,8 @@ flowchart TD
     F -->|"numerically identical"| H["Same predictor"]
     G -->|"numerically identical"| H
 ```
+
+
 
 Thus, kriging tends to be formulated in a slightly more general way, but the difference between a Gaussian assumption and omitting it is more about a hierarchy of guarantees of the linear estimator rather than a difference in the actual estimates. This is how Gaussian Process Regression's predictions and variances are guaranteed to match kriging even if the assumption is omitted.
 
@@ -1311,6 +1317,8 @@ $\sigma^2 = 1$, $\ell = 0.3$, and measurement error
 $\sigma^2_\varepsilon = 0.05$. We observe the field at 60 randomly
 chosen grid cells with noise.
 
+
+
 ```{r cs-setup, warning = FALSE, message = FALSE}
 #| echo: false
 library(Matrix)
@@ -1350,6 +1358,8 @@ pred_locs   <- grid_locs[non_obs_idx, ]
 n_pred      <- nrow(pred_locs)
 ```
 
+
+
 ## Part 1: Simple kriging via explicit matrices
 
 From the Simple Kriging tab, the state vector is
@@ -1357,6 +1367,8 @@ $\alpha = (v_\text{obs}, v_\text{pred})^\top$, the observation matrix
 is $A = [I \mid 0]$, and $Q = C_\text{all}^{-1}$ is the inverse of the
 joint covariance over all locations. With
 $\Sigma = \sigma^2_\varepsilon I$, the posterior mean and variance are:
+
+
 
 ```{r cs-exact}
 #| echo: true
@@ -1388,7 +1400,11 @@ se_blm[obs_idx]       <- sqrt(post_var[seq_len(n)])
 se_blm[non_obs_idx]   <- sqrt(post_var[(n+1):(n+n_pred)])
 ```
 
+
+
 Now validate against `gstat`:
+
+
 
 ```{r cs-exact-validate}
 #| echo: true
@@ -1412,6 +1428,8 @@ pred_gstat <- krig_out$var1.pred
 se_gstat   <- sqrt(pmax(krig_out$var1.var, 0))
 ```
 
+
+
 Machine epsilon. The six lines of matrix algebra and `gstat`'s kriging
 engine are computing the same number.
 
@@ -1424,6 +1442,8 @@ FEM discretization of the Matérn SPDE. The formula is unchanged.
 We first fit INLA to estimate the covariance parameters from data, then
 use those parameters to build $Q$ and apply the same posterior mean
 formula directly.
+
+
 
 ```{r cs-spde-setup}
 #| echo: false
@@ -1467,8 +1487,12 @@ sigma2_inla <- 1 / (4 * pi * tau_inla^2 * kappa_inla^2)
 rho_inla    <- sqrt(8) / kappa_inla
 ```
 
+
+
 Now build $Q$ with INLA's estimated parameters and apply the same
 posterior mean formula — this time with a sparse solve:
+
+
 
 ```{r cs-spde-solve}
 #| echo: true
@@ -1498,7 +1522,11 @@ se_spde   <- sqrt(vapply(seq_len(p), function(i) {
 }, numeric(1)))
 ```
 
+
+
 Validate against INLA:
+
+
 
 ```{r cs-spde-validate}
 #| echo: true
@@ -1510,10 +1538,14 @@ cat(sprintf("Max |sparse BLM - INLA| at obs: %.2e\n",
             max(abs(pred_spde_obs - pred_inla))))
 ```
 
+
+
 Near-machine precision — the explicit sparse matrix formula and INLA's
 fitting engine agree.
 
 ## Timing
+
+
 
 ```{r cs-timing}
 #| echo: true
@@ -1544,6 +1576,8 @@ cat(sprintf("INLA:          %.1f ms\n", t_inla))
 cat(sprintf("Speedup:       %.0fx\n",   speedup))
 ```
 
+
+
 The explicit sparse solve is `r sprintf("%.0f", speedup)`x faster
 (`r sprintf("%.1f", t_explicit)` ms vs `r sprintf("%.1f", t_inla)` ms).
 INLA's overhead comes from hyperparameter estimation and Laplace
@@ -1551,6 +1585,8 @@ approximation — useful for full Bayesian inference, unnecessary when
 parameters are treated as known.
 
 ## Results
+
+
 
 ```{r cs-plot}
 #| echo: false
@@ -1609,6 +1645,8 @@ p6 <- tile_plot(make_df(pred_spde - pred_gstat, "f"), err_scale,
 (p1 | p2 | p3) / (p4 | p5 | p6)
 ```
 
+
+
 ::: {.callout-note}
 ## What the code is doing
 
@@ -1646,3 +1684,4 @@ precomputed sparse matrix from satellite footprint geometries.
 
 ::: {#refs}
 :::
+
