@@ -6,8 +6,7 @@ title: "About"
 
 I'm a statistician based in Boston with a PhD in Statistics from Boston 
 University and a background in statistical consulting. My graduate research focused on spatial modeling for satellite data. 
-I'm interested in the foundations of statistical inference and what it 
-actually means to draw valid conclusions from data.
+
 
 I think a lot about epistemology — not in an abstract philosophical way, 
 but in a practical sense: how do we know what we know, and how often 
