@@ -188,10 +188,6 @@ window.Quarto = {
     <a class="nav-link" href="../../posts.html"> 
 <span class="menu-text">Writing</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../projects.html"> 
-<span class="menu-text">Projects</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-slides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Slides</span>
@@ -306,7 +302,7 @@ window.Quarto = {
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <section id="kriging-as-bayesian-linear-regression" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="kriging-as-bayesian-linear-regression"><span class="header-section-number">1.1</span> Kriging as Bayesian Linear Regression</h2>
-<p>In this post, I make the claim that “Kriging–a method so dominant in the field of geostatistics as to be almost synonymous with spatial prediction–is Bayesian linear regression.” This is a bit provocative in that Kriging does not require distributional assumptions and is not typically framed in Bayesian terms. But the claim is still precise: for any kriging method producing a prediction <span class="math inline">\(p\)</span> and prediction error <span class="math inline">\(s\)</span>, there exists a Bayesian linear regression model with a Gaussian prior whose posterior mean is <span class="math inline">\(p\)</span> and posterior standard deviation is <span class="math inline">\(s\)</span>.</p>
+<p>In this post, I make the claim that “Kriging–a method so dominant in the field of geostatistics as to be almost synonymous with spatial prediction–is Bayesian linear regression.” This is a bit provocative in that kriging does not require distributional assumptions and is not typically framed in Bayesian terms. But the claim is still precise: for any kriging method producing a prediction <span class="math inline">\(p\)</span> and prediction error <span class="math inline">\(s\)</span>, there exists a Bayesian linear regression model with a Gaussian prior whose posterior mean is <span class="math inline">\(p\)</span> and posterior standard deviation is <span class="math inline">\(s\)</span>.</p>
 <p>If you don’t find this provocative, another reaction you might have is “this is obvious.” It may be more accurate and familiar to use the terminology “Gaussian process regression” instead of “Bayesian Linear Regression” (as I write this the Wikipedia page for Kriging even reads, “Kriging, <em>or Gaussian Process Regression</em>”). But this raises two questions: first, even introductory Kriging texts often point out that a Gaussian assumption is unnecessary (so how can Kriging <em>be</em> GP regression?), and second, if GP regression is typically described in Bayesian terms, as they are taught in <span class="citation" data-cites="rasmussen2006gaussian">Rasmussen and Williams (<a href="#ref-rasmussen2006gaussian" role="doc-biblioref">2006</a>)</span> , how can it produce the same results as Kriging, which is still typically presented from a frequentist perspective?</p>
 <p>If you’re in the former camp, it may be helpful distinguish between two things:</p>
 <ul>
@@ -1193,14 +1189,14 @@ Another literature not covered in this history
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"INLA:          %.1f ms</span><span class="sc">\n</span><span class="st">"</span>, t_inla))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>INLA:          1632.4 ms</code></pre>
+<pre><code>INLA:          1653.0 ms</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"Speedup:       %.0fx</span><span class="sc">\n</span><span class="st">"</span>,   speedup))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Speedup:       5394x</code></pre>
+<pre><code>Speedup:       5628x</code></pre>
 </div>
 </div>
-<p>The explicit sparse solve is 5394x faster (0.3 ms vs 1632.4 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known.</p>
+<p>The explicit sparse solve is 5628x faster (0.3 ms vs 1653.0 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known.</p>
 </section>
 <section id="results" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="results"><span class="header-section-number">4.5</span> Results</h2>
