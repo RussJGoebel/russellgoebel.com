@@ -1,0 +1,8 @@
+{
+  "listing": "/posts.html",
+  "items": [
+    "/posts/kriging-competition/index.html",
+    "/posts/kriging-lindgren-SAR/index.html",
+    "/posts/kriging-gp-equivalence/index.html"
+  ]
+}

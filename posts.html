@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Russell Goebel</title>
+<title>Writing – Russell Goebel</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-recent-posts .list');
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-recent-posts'] = new List('listing-recent-posts', options);
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -149,7 +149,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -157,7 +157,7 @@ window.Quarto = {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./posts.html"> 
+    <a class="nav-link active" href="./posts.html" aria-current="page"> 
 <span class="menu-text">Writing</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -182,22 +182,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#recent-writing" id="toc-recent-writing" class="nav-link active" data-scroll-target="#recent-writing">Recent Writing</a></li>
-  <li><a href="#featured" id="toc-featured" class="nav-link" data-scroll-target="#featured">Featured</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Russell Goebel</h1>
+<h1 class="title">Writing</h1>
 </div>
 
 
@@ -214,15 +207,16 @@ window.Quarto = {
 </header>
 
 
-<p>I’m a statistician with a background in consulting and a specialty in spatial modeling. I care about epistemology, rigor, and the gap between how statistics is taught and how it’s actually practiced. This site is where I think out loud — about statistical methods, data analysis, and occasionally other things.</p>
-<section id="recent-writing" class="level2">
-<h2 class="anchored" data-anchor-id="recent-writing">Recent Writing</h2>
-<div id="listing-recent-posts" class="quarto-listing quarto-listing-container-default">
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
 <div class="quarto-post image-right" data-index="0" data-categories="statistics,bayesian" data-listing-date-sort="1779163200000" data-listing-file-modified-sort="1780516959020" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="65" data-listing-word-count-sort="12942">
 <div class="thumbnail">
 <p><a href="./posts/kriging-competition/index.html" class="no-external"></a></p><a href="./posts/kriging-competition/index.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:recent-posts:posts/kriging-competition/index.html -->
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/kriging-competition/index.html -->
 </a><p><a href="./posts/kriging-competition/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -247,7 +241,7 @@ May 19, 2026
 <div class="quarto-post image-right" data-index="1" data-categories="spatial statistics,downscaling,bayesian,kriging" data-listing-date-sort="1778990400000" data-listing-file-modified-sort="1780514220863" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2670">
 <div class="thumbnail">
 <p><a href="./posts/kriging-lindgren-SAR/index.html" class="no-external"></a></p><a href="./posts/kriging-lindgren-SAR/index.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:recent-posts:posts/kriging-lindgren-SAR/index.html -->
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/kriging-lindgren-SAR/index.html -->
 </a><p><a href="./posts/kriging-lindgren-SAR/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -272,7 +266,7 @@ May 17, 2026
 <div class="quarto-post image-right" data-index="2" data-categories="spatial statistics,bayesian,gaussian processes,kriging" data-listing-date-sort="1778040000000" data-listing-file-modified-sort="1780519374994" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="59" data-listing-word-count-sort="11677">
 <div class="thumbnail">
 <p><a href="./posts/kriging-gp-equivalence/index.html" class="no-external"></a></p><a href="./posts/kriging-gp-equivalence/index.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:recent-posts:posts/kriging-gp-equivalence/index.html -->
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/kriging-gp-equivalence/index.html -->
 </a><p><a href="./posts/kriging-gp-equivalence/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -298,18 +292,7 @@ May 6, 2026
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div>
-</section>
-<section id="featured" class="level2">
-<h2 class="anchored" data-anchor-id="featured">Featured</h2>
-<p><strong><a href="./slides/fastblm_and_spatintegrate.html">Area-to-Area Spatial Prediction</a></strong></p>
-<p>A walkthrough of <code>fastblm</code> and <code>spatintegrate</code> for satellite SIF downscaling — raster SAR models, Fourier-Matérn priors, and area-to-area kriging.</p>
-
-
-
-</section>
-
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

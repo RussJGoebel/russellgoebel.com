@@ -1,20 +1,10 @@
 {
   "listingMap": {
     "index.qmd": [
-      "posts",
-      "projects/spatialBasis/index.qmd"
+      "posts"
     ],
     "posts.qmd": [
       "posts"
-    ],
-    "projects\\spatialbasis\\index.qmd": [
-      "posts/*.qmd"
-    ],
-    "projects\\spatintegrate\\index.qmd": [
-      "posts/*.qmd"
-    ],
-    "projects.qmd": [
-      "projects/*/index.qmd"
     ]
   }
 }
