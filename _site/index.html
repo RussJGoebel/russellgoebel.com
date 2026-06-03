@@ -96,34 +96,6 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-featured-project .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: [],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-featured-project'] = new List('listing-featured-project', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
   </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -188,10 +160,6 @@ window.Quarto = {
     <a class="nav-link" href="./posts.html"> 
 <span class="menu-text">Writing</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
-<span class="menu-text">Projects</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-slides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Slides</span>
@@ -214,8 +182,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#recent-writing" id="toc-recent-writing" class="nav-link active" data-scroll-target="#recent-writing">Recent Writing</a></li>
+  <li><a href="#featured" id="toc-featured" class="nav-link" data-scroll-target="#featured">Featured</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -239,14 +214,12 @@ window.Quarto = {
 </header>
 
 
-<p>I’m a statistician with a background in consulting and academic research. I care about epistemology, rigor, and the gap between how statistics is taught and how it’s actually practiced.</p>
-<p>This site is where I think out loud — about statistical methods, data analysis, and occasionally other things.</p>
-<div class="grid">
-<section id="recent-writing" class="level2 g-col-6">
+<p>I’m a statistician with a background in consulting and academic research. I care about epistemology, rigor, and the gap between how statistics is taught and how it’s actually practiced. This site is where I think out loud — about statistical methods, data analysis, and occasionally other things.</p>
+<section id="recent-writing" class="level2">
 <h2 class="anchored" data-anchor-id="recent-writing">Recent Writing</h2>
 <div id="listing-recent-posts" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="statistics,bayesian" data-listing-date-sort="1779163200000" data-listing-file-modified-sort="1780508369350" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="65" data-listing-word-count-sort="12943">
+<div class="quarto-post image-right" data-index="0" data-categories="statistics,bayesian" data-listing-date-sort="1779163200000" data-listing-file-modified-sort="1780516959020" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="65" data-listing-word-count-sort="12942">
 <div class="thumbnail">
 <p><a href="./posts/kriging-competition/index.html" class="no-external"></a></p><a href="./posts/kriging-competition/index.html" class="no-external">
 <p class="card-img-top"><img src="posts\kriging-competition\index_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
@@ -327,21 +300,14 @@ No matching items
 </div>
 </div>
 </section>
-<section id="featured-project" class="level2 g-col-6">
-<h2 class="anchored" data-anchor-id="featured-project">Featured Project</h2>
-<div id="listing-featured-project" class="quarto-listing quarto-listing-container-default">
-<div class="list quarto-listing-default">
+<section id="featured" class="level2">
+<h2 class="anchored" data-anchor-id="featured">Featured</h2>
+<p><strong><a href="./slides/fastblm_and_spatintegrate.html">Area-to-Area Spatial Prediction</a></strong></p>
+<p>A walkthrough of <code>fastblm</code> and <code>spatintegrate</code> for satellite SIF downscaling — raster SAR models, Fourier-Matérn priors, and area-to-area kriging.</p>
 
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
+
+
 </section>
-</div>
-
-
-
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

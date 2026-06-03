@@ -12,8 +12,6 @@ website:
         text: About
       - href: posts.qmd
         text: Writing
-      - href: projects.qmd
-        text: Projects
       - text: Slides
         menu:
           - href: slides/fastblm_and_spatintegrate.qmd

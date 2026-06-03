@@ -176,7 +176,7 @@ Given that the expensive part of spatial prediction is inverting a covariance ma
 
 3. **Make $C^{-1}$ sparse** — NNGP, MRA, LatticeKrig, and SPDE all construct sparse precision matrices. NNGP and MRA do this via conditional independence truncation; LatticeKrig via a Markov random field prior on basis coefficients; SPDE via the finite element discretization of a local differential operator.
 
-4. **Diagonalize $C$ via Fourier** — Periodic Embedding takes a different route entirely: for a stationary process on a regular grid, $C$ is circulant and exactly diagonal in the Fourier basis. All matrix operations reduce to pointwise divisions on the spectral density, costing $O(n \log n)$ via FFT.
+4. **Diagonalize $C$ via Fourier** — Periodic Embedding does both 2. and 3. simultaneously: for a stationary process on a regular grid, $C$ is exactly diagonal in the Fourier basis. All matrix operations reduce to pointwise divisions on the spectral density, costing $O(n \log n)$ via FFT.
 
 Two further methods sidestep the global computation altogether. laGP never forms a global $C$, instead fitting a small exact GP near each prediction location. Gapfill is not a GP method at all — it is an algorithmic gap-filling scheme for satellite rasters.
 

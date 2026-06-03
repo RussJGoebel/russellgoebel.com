@@ -6,30 +6,20 @@ listing:
     sort: "date desc"
     type: default
     max-items: 3
-  - id: featured-project
-    contents: projects/spatialBasis/index.qmd
-    type: default
 ---
 
 I'm a statistician with a background in consulting and academic research. 
 I care about epistemology, rigor, and the gap between how statistics is 
 taught and how it's actually practiced.
-
 This site is where I think out loud — about statistical methods, data 
 analysis, and occasionally other things.
 
-:::  {.grid}
-
-::: {.g-col-6}
 ## Recent Writing
 ::: {#recent-posts}
 :::
-:::
 
-::: {.g-col-6}
-## Featured Project
-::: {#featured-project}
-:::
-:::
+## Featured
 
-:::
+**[Area-to-Area Spatial Prediction](slides/fastblm_and_spatintegrate.qmd)**
+
+A walkthrough of `fastblm` and `spatintegrate` for satellite SIF downscaling — raster SAR models, Fourier-Matérn priors, and area-to-area kriging.
