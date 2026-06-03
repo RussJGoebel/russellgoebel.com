@@ -3,16 +3,15 @@ title: "Area-to-area kriging with basis functions"
 date: 2026-05-17
 description: "Satellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly."
 categories: [spatial statistics, downscaling, bayesian, kriging]
+bibliography: reference.bib
 ---
 
-In a [previous post](LINK), we showed that kriging is Bayesian linear regression:
-choose basis functions, integrate them over observation regions to build $A$, place a
-Gaussian prior on the coefficients, and the posterior mean is the kriging predictor.
+In a [previous post](../kriging-gp-equivalence/index.qmd), I examine how kriging and Gaussian process regression can be formulated as Bayesian linear regression. The posterior mean is the kriging predictor.
 This post is about what happens when observations are *areas* rather than points —
 the area-to-area (ATA) kriging problem — and why the choice of basis functions is
 not incidental but central to making the problem tractable.
 
-## The naive approach fails
+## The naive approach is expensive
 
 Classical point-referenced kriging predicts $v(s_0)$ from observations
 $y_1, \ldots, y_n$ using the covariance structure of the field. When each observation
@@ -27,7 +26,7 @@ $$\mathrm{Cov}(y_i, y_j) = \frac{1}{|D_i||D_j|}\iint_{D_i \times D_j} C(s,t)\,ds
 
 With $n$ observations this requires $O(n^2)$ double integrals — one for every pair.
 For $n = 10{,}000$ satellite soundings and footprints that may be kilometres across,
-this is not just slow but often treated as a non-starter. Pretending each footprint is a point
+this is not just slow but often treated as a non-starter. That would require 100 million **double integrals** just to build the covariance matrix. Pretending each footprint is a point
 at its centroid avoids the double integrals, but as we show below it miscalibrates
 uncertainty in a systematic way.
 
@@ -84,24 +83,11 @@ It is noteworthy that many other basis function types are easy to integrate. For
 
 ## Why we'll start with it: SPDE won the satellite dataset
 
-In the @heaton2019case competition, the SPDE/INLA method achieved the best RMSE on
-the real satellite surface temperature data (1.53) and was a top-performer on their simulation. The simulated data competition was won by MRA (0.83 RMSE), which uses
-a different approximation strategy well-suited to the known covariance structure of
-simulated data.
+In the @heaton2019case competition--see [*my writeup*](../posts/kriging-competition/index.Rmd) for a summary--the SPDE/INLA method achieved the best RMSE on
+the real satellite surface temperature data (1.53 RMSE) and was a top-performer on their simulation both in terms of speed and accuracy. Not only this, but their results hold for regular lattices, whose integrals are trivial to compute using area calculations available in common spatial packages like `sf`.
 
-The satellite reversal is telling. Real satellite data has genuine nonstationarity
-and anisotropy — the estimated spectrum is visibly anisotropic, with longer correlation
-in one direction than another. Methods that assumed a fixed parametric isotropic
-Matérn suffered; the SPDE triangulation mesh, being irregular and adaptive, handled
-this more gracefully.
+While it's a clear first-attempt to port to the areal setting, several methods are likely low-hanging-fruit as well. For example, another top performer for point-referenced data, LatticeKrig, uses a similarly motivated basis structure (with an intended spatially autoregressive prior) and would likely be easy to import to an areal setting. LatticeKrig uses basis functions are radial polynomials--which adds a step for integration beyond areal averages, but would not be challenging to integrate over triangulations.
 
-The overcoverage of SPDE on the simulated dataset (coverage 1.00, nominal 0.90) is
-a separate issue rooted in implementation rather than methodology: the mesh spacing
-was ~6 miles while the data grid spacing was ~0.5 miles, meaning roughly 100
-observations were averaged per mesh node. At that resolution the nugget becomes
-unidentifiable — the fine-scale variation that distinguishes nugget from smooth
-field is averaged away. The practical fix is to pre-estimate the nugget separately
-or use a mesh matching the data resolution.
 
 ## The connection to SAR models on regular grids
 
@@ -335,51 +321,100 @@ parameters predicts at any resolution by evaluating the basis functions at new
 locations, with no refitting required.
 
 ```{r fit-fourier, include=FALSE, cache=TRUE}
-tol <- 0.005
-prev <- fourier_fit_J(10, fps_sf, domain_bbox, delta, rho_hat, phi_hat)
-final_f <- prev
-for (J_now in c(20, 40, 60, 80)) {
-  curr <- fourier_fit_J(J_now, fps_sf, domain_bbox, delta, rho_hat, phi_hat)
-  if (sqrt(mean((curr$fitted - prev$fitted)^2)) < tol) { final_f <- curr; break }
-  prev <- curr; final_f <- curr
-}
+# Parameter matching: get kappa2 and phi for Fourier basis
+# h_norm = normalised cell size on [0,1]^2
+h_norm      <- 1 / round(sqrt(n_cells))   # = 1/80 for 80x80 grid
+L           <- max(diff(domain_bbox[c(1,3)]), diff(domain_bbox[c(2,4)]))
+J           <- round(L / delta)
+ 
+params      <- get_matern_parameters_from_SAR(rho_hat, sar_precision=1, h=h_norm)
+KAPPA2_NORM <- params$kappa2
+phi_f       <- phi_hat * params$matern_variance
+ 
+# Frequency grid: unit-square convention, top K modes sorted by eigenvalue
+K       <- min(10000L, J^2L)
+bbox_sq <- domain_bbox   # already square
+ 
+kx_all     <- rep(0:J, each=J+1L)
+ky_all     <- rep(0:J, times=J+1L)
+lambda_all <- pi^2 * (kx_all^2 + ky_all^2)
+ord        <- order(KAPPA2_NORM + lambda_all)
+kx         <- kx_all[ord[seq_len(K)]]
+ky         <- ky_all[ord[seq_len(K)]]
+ 
+freq_grid <- list(
+  omega_mat   = cbind(omega_x = kx * pi / L, omega_y = ky * pi / L),
+  norm_const  = ifelse(kx==0L, 1, sqrt(2)) * ifelse(ky==0L, 1, sqrt(2)),
+  indices     = cbind(j1 = kx+1L, j2 = ky+1L),
+  J1 = max(kx)+1L, J2 = max(ky)+1L,
+  domain_bbox = bbox_sq, norm = "unit_square"
+)
+ 
+# Design matrix and prior
+A_f         <- fourier_integrate_basis(fps_sf, freq_grid)
+lambda_norm <- pi^2 * (kx^2 + ky^2)
+q_diag      <- (KAPPA2_NORM + lambda_norm)^2
+Q_f         <- Matrix::Diagonal(x = q_diag)
+ 
+# Fit
+fit_fourier <- fit_fastblm(
+  y      = y,
+  A      = A_f,
+  Q      = Q_f,
+  phi    = phi_f,
+  solver = "woodbury",
+  Q_inv  = function(v) v / q_diag
+)
+ 
+fitted_fourier <- as.numeric(A_f %*% fit_fourier$posterior_mean)
+
 ```
 
-```{r plot-multiresolution, fig.height=8}
-fourier_evaluate <- function(coords, fg) {
-  ox <- fg$omega_mat[,1]; oy <- fg$omega_mat[,2]; nc <- fg$norm_const
-  sx <- as.matrix(coords)[,1]; sy <- as.matrix(coords)[,2]
-  sweep(cos(outer(sx,ox)) * cos(outer(sy,oy)), 2, nc, `*`)
+```{r plot-multiresolution, fig.height=8, cache = TRUE}
+# Build sf grids at three resolutions for prediction
+make_grid_sf <- function(n, bbox, crs=32619) {
+  sf::st_sf(geometry = sf::st_make_grid(
+    sf::st_as_sfc(sf::st_bbox(
+      setNames(bbox, c("xmin","ymin","xmax","ymax")), crs=crs)),
+    n = c(n, n), square = TRUE
+  ))
 }
-grids <- list(
-  "Coarse (40×40)"  = expand.grid(x=seq(0,10e3,l=40),  y=seq(0,10e3,l=40)),
-  "Medium (80×80)"  = expand.grid(x=seq(0,10e3,l=80),  y=seq(0,10e3,l=80)),
-  "Fine (200×200)"  = expand.grid(x=seq(0,10e3,l=200), y=seq(0,10e3,l=200))
+ 
+grids_sf <- list(
+  "Coarse (40x40)"  = make_grid_sf(40,  domain_bbox),
+  "Medium (80x80)"  = make_grid_sf(80,  domain_bbox),
+  "Fine (200x200)"  = make_grid_sf(200, domain_bbox)
 )
-pred_df <- do.call(rbind, Map(function(nm,g) {
-  Phi <- fourier_evaluate(g, final_f$fg)
-  cbind(g, pred=as.numeric(Phi %*% final_f$fit$posterior_mean), res=nm)
-}, names(grids), grids))
-ggplot(pred_df, aes(x,y,fill=pred)) +
-  geom_raster() + facet_wrap(~res, ncol=1) +
-  scale_fill_distiller(palette="RdYlBu") + coord_equal() +
-  labs(title="Fourier-SAR posterior mean at three resolutions",
-       subtitle="Same fitted coefficients — no refitting",
-       x="Easting (m)", y="Northing (m)", fill="v̂(s)") +
+ 
+pred_df <- do.call(rbind, Map(function(nm, g) {
+  A_pred <- fourier_integrate_basis(g, freq_grid)
+  pred   <- as.numeric(A_pred %*% fit_fourier$posterior_mean)
+  cents  <- sf::st_coordinates(sf::st_centroid(g))
+  data.frame(x = cents[,1], y = cents[,2], pred = pred, res = nm)
+}, names(grids_sf), grids_sf))
+ 
+ggplot(pred_df, aes(x, y, fill = pred)) +
+  geom_raster() +
+  facet_wrap(~res, ncol = 1) +
+  scale_fill_distiller(palette = "RdYlBu") +
+  coord_equal() +
+  labs(title = "Fourier-SAR posterior mean at three resolutions",
+       subtitle = "Same fitted coefficients — no refitting",
+       x = "Easting (m)", y = "Northing (m)", fill = "v̂(s)") +
   theme_post()
 ```
 
 The three panels show predictions at 40×40, 80×80, and 200×200 resolution from
 the same fitted model. Adding resolution costs only basis function evaluations,
-not model re-estimation.
+not model re-estimation (though there may be some open questions as to what resolution of SAR model is necessary to get good estimates of these parameters, they still inherit properties of whatever procedure is used *for the SAR model*, such guarantees from maximum likelihood).
 
 ## Summary
 
 The ATA problem reduces from $O(n^2)$ double integrals to $O(nK)$ single integrals
 whenever the covariance structure is encoded in a prior $Q$ on basis coefficients
-rather than built directly from $C(s,t)$. Two things must be true for this to work:
-the basis functions must integrate over polygon footprints in closed form, and $Q$
-must correctly represent the target covariance.
+rather than built directly from $C(s,t)$. Two things are convenient for this to work:
+the basis functions must be integrable over footprints in closed form (or via quadrature), and $Q$
+must adequately represent the target covariance.
 
 The SPDE framework of @lindgren2011explicit satisfies both conditions for Matérn
 fields — by construction, since $Q$ is derived directly from the SPDE operator. On

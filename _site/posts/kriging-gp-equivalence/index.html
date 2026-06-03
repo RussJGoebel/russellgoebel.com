@@ -193,10 +193,10 @@ window.Quarto = {
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-talks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Talks</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-slides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Slides</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-talks">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-slides">    
         <li>
     <a class="dropdown-item" href="../../slides/fastblm_and_spatintegrate.html">
  <span class="dropdown-text">fastblm and spatintegrate</span></a>
@@ -230,19 +230,20 @@ window.Quarto = {
   <li><a href="#bayesian-vs-frequentist-perspectives" id="toc-bayesian-vs-frequentist-perspectives" class="nav-link" data-scroll-target="#bayesian-vs-frequentist-perspectives"><span class="header-section-number">2.2</span> Bayesian vs Frequentist Perspectives</a></li>
   <li><a href="#statistical-traditions-in-kriging" id="toc-statistical-traditions-in-kriging" class="nav-link" data-scroll-target="#statistical-traditions-in-kriging"><span class="header-section-number">2.3</span> Statistical Traditions in Kriging</a>
   <ul class="collapse">
-  <li><a href="#sec-simple-kriging-setup" id="toc-sec-simple-kriging-setup" class="nav-link" data-scroll-target="#sec-simple-kriging-setup"><span class="header-section-number">2.3.1</span> A Simple ksriging setup</a></li>
+  <li><a href="#sec-simple-kriging-setup" id="toc-sec-simple-kriging-setup" class="nav-link" data-scroll-target="#sec-simple-kriging-setup"><span class="header-section-number">2.3.1</span> A Simple kriging setup</a></li>
   <li><a href="#kriging-conventions-variogram-vs-covariance" id="toc-kriging-conventions-variogram-vs-covariance" class="nav-link" data-scroll-target="#kriging-conventions-variogram-vs-covariance"><span class="header-section-number">2.3.2</span> Kriging Conventions: Variogram vs Covariance</a></li>
   <li><a href="#sec-nugget" id="toc-sec-nugget" class="nav-link" data-scroll-target="#sec-nugget"><span class="header-section-number">2.3.3</span> Kriging Conventions: Nuggets and Epistemic vs Aleatoric Error</a></li>
   <li><a href="#block-kriging-area-to-area-kriging" id="toc-block-kriging-area-to-area-kriging" class="nav-link" data-scroll-target="#block-kriging-area-to-area-kriging"><span class="header-section-number">2.3.4</span> Block kriging (area-to-area kriging)</a></li>
   <li><a href="#parameter-estimation-variogram-fitting-versus-maximum-likelihood-estimation" id="toc-parameter-estimation-variogram-fitting-versus-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#parameter-estimation-variogram-fitting-versus-maximum-likelihood-estimation"><span class="header-section-number">2.3.5</span> Parameter Estimation: Variogram Fitting versus Maximum Likelihood Estimation</a></li>
   </ul></li>
-  <li><a href="#fixed-rank-kriging-1" id="toc-fixed-rank-kriging-1" class="nav-link" data-scroll-target="#fixed-rank-kriging-1"><span class="header-section-number">2.4</span> Fixed Rank Kriging</a></li>
-  <li><a href="#the-spde-approach" id="toc-the-spde-approach" class="nav-link" data-scroll-target="#the-spde-approach"><span class="header-section-number">2.5</span> The SPDE Approach</a></li>
-  <li><a href="#linking-area-to-area-kriging-to-gaussian-process-regression" id="toc-linking-area-to-area-kriging-to-gaussian-process-regression" class="nav-link" data-scroll-target="#linking-area-to-area-kriging-to-gaussian-process-regression"><span class="header-section-number">2.6</span> Linking Area-to-Area Kriging to Gaussian Process Regression</a></li>
-  <li><a href="#raster-basis-sar-models" id="toc-raster-basis-sar-models" class="nav-link" data-scroll-target="#raster-basis-sar-models"><span class="header-section-number">2.7</span> Raster Basis &amp; SAR models</a>
+  <li><a href="#fixed-rank-kriging-1" id="toc-fixed-rank-kriging-1" class="nav-link" data-scroll-target="#fixed-rank-kriging-1"><span class="header-section-number">2.4</span> Fixed-Rank Kriging</a></li>
+  <li><a href="#the-rkhs-view-covariance-functions-as-basis-functions" id="toc-the-rkhs-view-covariance-functions-as-basis-functions" class="nav-link" data-scroll-target="#the-rkhs-view-covariance-functions-as-basis-functions"><span class="header-section-number">2.5</span> The RKHS View: Covariance Functions as Basis Functions</a></li>
+  <li><a href="#the-spde-approach" id="toc-the-spde-approach" class="nav-link" data-scroll-target="#the-spde-approach"><span class="header-section-number">2.6</span> The SPDE Approach</a></li>
+  <li><a href="#linking-area-to-area-kriging-to-gaussian-process-regression" id="toc-linking-area-to-area-kriging-to-gaussian-process-regression" class="nav-link" data-scroll-target="#linking-area-to-area-kriging-to-gaussian-process-regression"><span class="header-section-number">2.7</span> Linking Area-to-Area Kriging to Gaussian Process Regression</a></li>
+  <li><a href="#raster-basis-sar-models" id="toc-raster-basis-sar-models" class="nav-link" data-scroll-target="#raster-basis-sar-models"><span class="header-section-number">2.8</span> Raster Basis &amp; SAR models</a>
   <ul class="collapse">
-  <li><a href="#approximation-quality" id="toc-approximation-quality" class="nav-link" data-scroll-target="#approximation-quality"><span class="header-section-number">2.7.1</span> Approximation quality</a></li>
-  <li><a href="#equivalence-with-a-sar-model" id="toc-equivalence-with-a-sar-model" class="nav-link" data-scroll-target="#equivalence-with-a-sar-model"><span class="header-section-number">2.7.2</span> Equivalence with a SAR Model</a></li>
+  <li><a href="#approximation-quality" id="toc-approximation-quality" class="nav-link" data-scroll-target="#approximation-quality"><span class="header-section-number">2.8.1</span> Approximation quality</a></li>
+  <li><a href="#equivalence-with-a-sar-model" id="toc-equivalence-with-a-sar-model" class="nav-link" data-scroll-target="#equivalence-with-a-sar-model"><span class="header-section-number">2.8.2</span> Equivalence with a SAR Model</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#parallel-histories-of-kriging-and-gaussian-process-regression" id="toc-parallel-histories-of-kriging-and-gaussian-process-regression" class="nav-link" data-scroll-target="#parallel-histories-of-kriging-and-gaussian-process-regression"><span class="header-section-number">3</span> Parallel Histories of Kriging and Gaussian Process Regression</a>
@@ -333,7 +334,7 @@ window.Quarto = {
 \varepsilon \sim N(0, \Sigma)\]</span></p>
 <p>whose posterior mean and variance are:</p>
 <p><span class="math display">\[\hat{\alpha} = (A^T \Sigma^{-1}A + Q)^{-1} A^T\Sigma^{-1}y\]</span></p>
-<p><span class="math display">\[\text{Var}(\alpha \mid y, Q, \Sigma) = (A^T\Sigma^{-1}A + Q)^{-1}\]</span> In the following <strong>tabset panels</strong>, how to choose A and Q to match various kriging models is given. Several of the methods discussed here are drawn from <span class="citation" data-cites="heaton2019case">Heaton et al. (<a href="#ref-heaton2019case" role="doc-biblioref">2019</a>)</span>, a noteworthy paper in which the authors of each method implemented their own procedure and competed head-to-head on both simulated and real satellite surface temperature data.</p>
+<p><span class="math display">\[\text{Var}(\alpha \mid y, Q, \Sigma) = (A^T\Sigma^{-1}A + Q)^{-1}\]</span> In the following <strong>tabset panels</strong>, how to choose A and Q to match various kriging models is given. Several of the methods discussed here are drawn from <span class="citation" data-cites="heaton2019case">Heaton et al. (<a href="#ref-heaton2019case" role="doc-biblioref">2019</a>)</span>, a noteworthy paper in which the authors of each method implemented their own procedure and competed head-to-head on both simulated and real satellite surface temperature data. For these panels I choose a more straightforward way of expressing kriging predictions with a linear model (using identity matrices as designs and augmenting with prediction locations), but there is an equivalent functional version using <a href="#the-rkhs-view-covariance-functions-as-basis-functions"><strong>covariance functions as basis functions</strong></a> which connects to reproducing kernel Hilbert spaces.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Simple kriging</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Ordinary kriging</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Universal kriging</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Fixed-rank kriging</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Predictive Process</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false">Spatial Partitioning</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false">Covariance Tapering</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false">SPDE (point-to-point)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-9-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-9" role="tab" aria-controls="tabset-1-9" aria-selected="false">ATA kriging (general)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-10-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-10" role="tab" aria-controls="tabset-1-10" aria-selected="false">SPDE (area-to-area)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-11-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-11" role="tab" aria-controls="tabset-1-11" aria-selected="false">LatticeKrig</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-12-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-12" role="tab" aria-controls="tabset-1-12" aria-selected="false">MRA</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-13-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-13" role="tab" aria-controls="tabset-1-13" aria-selected="false">NNGP</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-14-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-14" role="tab" aria-controls="tabset-1-14" aria-selected="false">Periodic Embedding</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-15-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-15" role="tab" aria-controls="tabset-1-15" aria-selected="false">Metakriging</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-16-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-16" role="tab" aria-controls="tabset-1-16" aria-selected="false">laGP</a></li></ul>
 <div class="tab-content">
@@ -713,7 +714,7 @@ A note on “fully Bayesian” inference
 <h2 data-number="2.3" class="anchored" data-anchor-id="statistical-traditions-in-kriging"><span class="header-section-number">2.3</span> Statistical Traditions in Kriging</h2>
 <p>There are several parallel choices that occur when even setting up the problem of spatial prediction–so much so that it is hard to even list them without “chasing my tail” by realizing that there is some notational oddity smuggled into the first bullet point. For this reason, let me describe my favored setup for the problem, and then explain how Kriging historically might have made different notational choices or assumptions.</p>
 <section id="sec-simple-kriging-setup" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="sec-simple-kriging-setup"><span class="header-section-number">2.3.1</span> A Simple ksriging setup</h3>
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="sec-simple-kriging-setup"><span class="header-section-number">2.3.1</span> A Simple kriging setup</h3>
 <p>Suppose we observe</p>
 <p><span class="math display">\[y_i = v(s_i) + \varepsilon_i\]</span></p>
 <p>where <span class="math inline">\(v(s)\)</span> is a mean-zero random field whose covariance function is defined, <span class="math inline">\(s_i\)</span> belongs to some index set <span class="math inline">\(D\)</span> (such as a subset of <span class="math inline">\(\mathbb{R}^2\)</span> denoting latitude and longitude), and <span class="math inline">\(\varepsilon_i\)</span> represents independent noise with covariance matrix <span class="math inline">\(\Sigma\)</span>.</p>
@@ -815,7 +816,7 @@ A_{\text{obs}} = \begin{pmatrix} I &amp; 0 \end{pmatrix}\]</span></p>
 <li>Historical tradition and interpretability is probably the dominant explanation for the centrality of variograms in the geostatistics literature — the covariance function carries the same information and connects more naturally to modern computational and Bayesian methods.</li>
 </ul>
 <p>So, in my generating model <span class="math inline">\(y_i(s) = v(s)+\varepsilon_i\)</span>, I could next write “where <span class="math inline">\(v(s)\)</span> has covariance <span class="math inline">\(C\)</span> or <span class="math inline">\(v(s)\)</span> has variogram <span class="math inline">\(\gamma\)</span>” but the two are essentially interchangeable.</p>
-<p>Those with expertise in Kriging may notice something else a bit unusual about how I have set up the kriging expression too, which leads me to:</p>
+<p>Those with expertise in kriging may notice something else a bit unusual about how I have set up the kriging expression too, which leads me to:</p>
 </section>
 <section id="sec-nugget" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="sec-nugget"><span class="header-section-number">2.3.3</span> Kriging Conventions: Nuggets and Epistemic vs Aleatoric Error</h3>
@@ -858,7 +859,7 @@ A_{\text{obs}} = \begin{pmatrix} I &amp; 0 \end{pmatrix}\]</span></p>
 </section>
 </section>
 <section id="fixed-rank-kriging-1" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="fixed-rank-kriging-1"><span class="header-section-number">2.4</span> Fixed Rank Kriging</h2>
+<h2 data-number="2.4" class="anchored" data-anchor-id="fixed-rank-kriging-1"><span class="header-section-number">2.4</span> Fixed-Rank Kriging</h2>
 <p>The computational bottleneck of kriging is the <span class="math inline">\(O(n^3)\)</span> cost of inverting <span class="math inline">\(K + \Sigma\)</span>. For large spatial datasets — hundreds of thousands of satellite observations, for instance — this is prohibitive. Fixed Rank Kriging (FRK), introduced by <span class="citation" data-cites="cressie2008fixed">N. Cressie and Johannesson (<a href="#ref-cressie2008fixed" role="doc-biblioref">2008</a>)</span>, addresses this by approximating the spatial field <span class="math inline">\(v\)</span> through a finite basis expansion.</p>
 <p>Suppose we represent <span class="math inline">\(v\)</span> as:</p>
 <p><span class="math display">\[v(s) = \sum_{k=1}^r \phi_k(s)\,\alpha_k + \delta(s)
@@ -895,8 +896,18 @@ FRK and the low-rank covariance approximation
 </div>
 </div>
 </section>
-<section id="the-spde-approach" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="the-spde-approach"><span class="header-section-number">2.5</span> The SPDE Approach</h2>
+<section id="the-rkhs-view-covariance-functions-as-basis-functions" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="the-rkhs-view-covariance-functions-as-basis-functions"><span class="header-section-number">2.5</span> The RKHS View: Covariance Functions as Basis Functions</h2>
+<p>The simple kriging predictor at a new location <span class="math inline">\(s_0\)</span> is</p>
+<p><span class="math display">\[\hat{v}(s_0) = k(s_0)^\top (C_{\text{obs}} + \Sigma)^{-1} y\]</span></p>
+<p>where <span class="math inline">\(k(s_0) = (C(s_1, s_0), \ldots, C(s_n, s_0))^\top\)</span> is the vector of covariances between the observations and the target. Writing out the weights <span class="math inline">\(\lambda = (C_{\text{obs}} + \Sigma)^{-1} y\)</span> explicitly, the predictor is</p>
+<p><span class="math display">\[\hat{v}(s_0) = \sum_{i=1}^n \lambda_i\, C(s_i, s_0)\]</span></p>
+<p>The kriging predictor is a linear combination of the covariance function evaluated at the observation locations. The basis functions are <span class="math inline">\(\phi_i(s) = C(s_i, s)\)</span> — one per observation, centered at each <span class="math inline">\(s_i\)</span> — and the coefficients <span class="math inline">\(\lambda_i\)</span> are determined by the data.</p>
+<p>This is not a coincidence. Any covariance function <span class="math inline">\(C\)</span> defines a reproducing kernel Hilbert space <span class="math inline">\(\mathcal{H}\)</span>, and the representer theorem guarantees that the minimum-norm function in <span class="math inline">\(\mathcal{H}\)</span> that fits the data always lies in the span of <span class="math inline">\(\{C(s_i, \cdot)\}\)</span>. Kriging is exactly this minimum-norm interpolant — which is why the weights take the form they do regardless of how the problem is derived.</p>
+<p>In the <span class="math inline">\(y = A\alpha + \varepsilon\)</span> framework, this corresponds to setting <span class="math inline">\(A_{ij} = C(s_i, s_j)\)</span> and <span class="math inline">\(Q = C_{\text{obs}}^{-1}\)</span>. The prior on <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\mathcal{N}(0, C_{\text{obs}})\)</span>, and prediction at <span class="math inline">\(s_0\)</span> is <span class="math inline">\(k(s_0)^\top \hat{\alpha}\)</span>, recovering the kriging predictor exactly. The predictive process approximation (see the tabset above) is exactly this construction at reduced rank — replacing the <span class="math inline">\(n\)</span> observation-centered basis functions with <span class="math inline">\(m \ll n\)</span> functions centered at chosen knots.</p>
+</section>
+<section id="the-spde-approach" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="the-spde-approach"><span class="header-section-number">2.6</span> The SPDE Approach</h2>
 <p>Fixed Rank Kriging achieves computational tractability by choosing basis functions for convenience, inducing a low-rank approximation to the covariance. <span class="citation" data-cites="lindgren2011explicit">Lindgren, Rue, and Lindström (<a href="#ref-lindgren2011explicit" role="doc-biblioref">2011</a>)</span> take a related but different approach: instead of choosing a basis so that the covariance is low rank, they choose a basis so that the covariance is sparse. Rather than approximating an arbitrary covariance, they show that a Gaussian field with a Matérn covariance function is the stationary solution of a specific stochastic partial differential equation (SPDE):</p>
 <p><span class="math display">\[(\kappa^2 - \Delta)^{\alpha/2} v(s) = \mathcal{W}(s)\]</span></p>
 <p>where <span class="math inline">\(\Delta\)</span> is the Laplacian, <span class="math inline">\(\kappa &gt; 0\)</span> controls the range, <span class="math inline">\(\alpha\)</span> controls the smoothness, and <span class="math inline">\(\mathcal{W}\)</span> is spatial white noise. The Matérn smoothness parameter <span class="math inline">\(\nu\)</span> is related to <span class="math inline">\(\alpha\)</span> by <span class="math inline">\(\nu = \alpha - d/2\)</span> where <span class="math inline">\(d\)</span> is the spatial dimension.</p>
@@ -930,8 +941,8 @@ Choosing the mesh
 </div>
 </div>
 </section>
-<section id="linking-area-to-area-kriging-to-gaussian-process-regression" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="linking-area-to-area-kriging-to-gaussian-process-regression"><span class="header-section-number">2.6</span> Linking Area-to-Area Kriging to Gaussian Process Regression</h2>
+<section id="linking-area-to-area-kriging-to-gaussian-process-regression" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="linking-area-to-area-kriging-to-gaussian-process-regression"><span class="header-section-number">2.7</span> Linking Area-to-Area Kriging to Gaussian Process Regression</h2>
 <p>Throughout this post we have worked with point observations <span class="math inline">\(y_i = v(s_i) + \varepsilon_i\)</span>. The area-to-area kriging problem requires a more general setup: observations are spatial averages of the field over footprints <span class="math inline">\(B_i\)</span> rather than point evaluations. This is natural in satellite remote sensing, where each measurement corresponds to an integral of the field over an irregular pixel footprint.</p>
 <p>A clean unification of both settings follows from the language of linear observation operators, developed rigorously in the context of Bayesian inverse problems by <span class="citation" data-cites="stuart2010inverse">Stuart (<a href="#ref-stuart2010inverse" role="doc-biblioref">2010</a>)</span>. Rather than treating point and areal observations as separate cases, we write:</p>
 <p><span class="math display">\[y_i = L_i[v] + \varepsilon_i\]</span></p>
@@ -952,8 +963,8 @@ Choosing the mesh
 <p>The prediction formula is otherwise identical to the point kriging case. The operator language makes this explicit — there is nothing conceptually new about areal observations, just a different covariance structure determined by the observation functionals. The additional computational difficulty is entirely in constructing <span class="math inline">\(K\)</span> and <span class="math inline">\(k_0\)</span>.</p>
 <p>This is where a basis function approach provides relief. By representing <span class="math inline">\(v\)</span> through a finite basis expansion, the double integrals factor into products of single integrals — reducing the <span class="math inline">\(O(n^2)\)</span> integration cost to <span class="math inline">\(O(nr)\)</span> single integrals for <span class="math inline">\(r\)</span> basis functions. We develop this in the next section.</p>
 </section>
-<section id="raster-basis-sar-models" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="raster-basis-sar-models"><span class="header-section-number">2.7</span> Raster Basis &amp; SAR models</h2>
+<section id="raster-basis-sar-models" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="raster-basis-sar-models"><span class="header-section-number">2.8</span> Raster Basis &amp; SAR models</h2>
 <p>Recall from the previous section that area-to-area kriging — equivalently, GP regression with areal observations — requires computing a covariance matrix <span class="math inline">\(K\)</span> whose entries involve double integrals of <span class="math inline">\(C(s,t)\)</span> over footprint pairs. In the Bayesian linear regression framework, the same model is:</p>
 <p><span class="math display">\[y = A\alpha + \varepsilon, \quad \alpha \sim N(0, Q^{-1}), \quad
 \varepsilon \sim N(0, \Sigma)\]</span></p>
@@ -973,8 +984,8 @@ Choosing the mesh
 <p><span class="math display">\[\widehat{L_0[v]} = a_0^\top(Q + A^\top\Sigma^{-1}A)^{-1}
 A^\top\Sigma^{-1}y\]</span></p>
 <p>This is a good approximation to area-to-area kriging in the same sense the SPDE approach for point data is a good approximation to kriging. The only approximations are the finite grid resolution <span class="math inline">\(\delta\)</span> and the FEM discretization underlying Lindgren’s <span class="math inline">\(Q\)</span>, both of which vanish as <span class="math inline">\(\delta \to 0\)</span>.</p>
-<section id="approximation-quality" class="level3" data-number="2.7.1">
-<h3 data-number="2.7.1" class="anchored" data-anchor-id="approximation-quality"><span class="header-section-number">2.7.1</span> Approximation quality</h3>
+<section id="approximation-quality" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="approximation-quality"><span class="header-section-number">2.8.1</span> Approximation quality</h3>
 <p>The difference between the exact area-to-area predictor and the raster basis predictor is:</p>
 <p><span class="math display">\[\left[k_0^\top(K + \Sigma)^{-1} -
 a_0^\top(Q + A^\top\Sigma^{-1}A)^{-1}A^\top\Sigma^{-1}\right]y\]</span></p>
@@ -982,8 +993,8 @@ a_0^\top(Q + A^\top\Sigma^{-1}A)^{-1}A^\top\Sigma^{-1}\right]y\]</span></p>
 <p>The posterior variance is fully deterministic and converges to the exact area-to-area kriging variance as a function of <span class="math inline">\(\delta\)</span> alone — assessable before any data are collected.</p>
 <p>The price of the raster basis approach is committing to a Matérn covariance and a regular grid. In return, the double integrals of classical area-to-area kriging are replaced by cheap single integrals, and the precision matrix is sparse and banded rather than dense. For satellite data already organized on a regular grid, this is often a natural and computationally decisive choice.</p>
 </section>
-<section id="equivalence-with-a-sar-model" class="level3" data-number="2.7.2">
-<h3 data-number="2.7.2" class="anchored" data-anchor-id="equivalence-with-a-sar-model"><span class="header-section-number">2.7.2</span> Equivalence with a SAR Model</h3>
+<section id="equivalence-with-a-sar-model" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2" class="anchored" data-anchor-id="equivalence-with-a-sar-model"><span class="header-section-number">2.8.2</span> Equivalence with a SAR Model</h3>
 <p>The precision matrix <span class="math inline">\(Q\)</span> from <span class="citation" data-cites="lindgren2011explicit">Lindgren, Rue, and Lindström (<a href="#ref-lindgren2011explicit" role="doc-biblioref">2011</a>)</span> on a regular grid is equivalent to the precision matrix of a Simultaneous Autoregressive (SAR) model. This connection is often stated in the literature but rarely derived explicitly — we sketch the argument here.</p>
 <p>A SAR model on a regular grid specifies:</p>
 <p><span class="math display">\[(I - \rho W)\alpha = \varepsilon, \quad \varepsilon \sim N(0, \sigma^2 I)\]</span></p>
@@ -1182,14 +1193,14 @@ Another literature not covered in this history
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"INLA:          %.1f ms</span><span class="sc">\n</span><span class="st">"</span>, t_inla))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>INLA:          1635.0 ms</code></pre>
+<pre><code>INLA:          1632.4 ms</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"Speedup:       %.0fx</span><span class="sc">\n</span><span class="st">"</span>,   speedup))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Speedup:       5571x</code></pre>
+<pre><code>Speedup:       5394x</code></pre>
 </div>
 </div>
-<p>The explicit sparse solve is 5571x faster (0.3 ms vs 1635.0 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known.</p>
+<p>The explicit sparse solve is 5394x faster (0.3 ms vs 1632.4 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known.</p>
 </section>
 <section id="results" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="results"><span class="header-section-number">4.5</span> Results</h2>

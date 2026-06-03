@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -135,6 +155,17 @@ window.Quarto = {
     <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-slides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Slides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-slides">    
+        <li>
+    <a class="dropdown-item" href="../../slides/fastblm_and_spatintegrate.html">
+ <span class="dropdown-text">fastblm and spatintegrate</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -151,7 +182,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-naive-approach-fails" id="toc-the-naive-approach-fails" class="nav-link active" data-scroll-target="#the-naive-approach-fails">The naive approach fails</a></li>
+  <li><a href="#the-naive-approach-is-expensive" id="toc-the-naive-approach-is-expensive" class="nav-link active" data-scroll-target="#the-naive-approach-is-expensive">The naive approach is expensive</a></li>
   <li><a href="#basis-functions-reduce-on2-to-on" id="toc-basis-functions-reduce-on2-to-on" class="nav-link" data-scroll-target="#basis-functions-reduce-on2-to-on">Basis functions reduce <span class="math inline">\(O(n^2)\)</span> to <span class="math inline">\(O(n)\)</span></a></li>
   <li><a href="#what-makes-a-good-basis" id="toc-what-makes-a-good-basis" class="nav-link" data-scroll-target="#what-makes-a-good-basis">What makes a good basis?</a></li>
   <li><a href="#why-well-start-with-it-spde-won-the-satellite-dataset" id="toc-why-well-start-with-it-spde-won-the-satellite-dataset" class="nav-link" data-scroll-target="#why-well-start-with-it-spde-won-the-satellite-dataset">Why we’ll start with it: SPDE won the satellite dataset</a></li>
@@ -201,15 +232,15 @@ window.Quarto = {
 </header>
 
 
-<p>In a <a href="LINK">previous post</a>, we showed that kriging is Bayesian linear regression: choose basis functions, integrate them over observation regions to build <span class="math inline">\(A\)</span>, place a Gaussian prior on the coefficients, and the posterior mean is the kriging predictor. This post is about what happens when observations are <em>areas</em> rather than points — the area-to-area (ATA) kriging problem — and why the choice of basis functions is not incidental but central to making the problem tractable.</p>
-<section id="the-naive-approach-fails" class="level2">
-<h2 class="anchored" data-anchor-id="the-naive-approach-fails">The naive approach fails</h2>
+<p>In a <a href="../../posts/kriging-gp-equivalence/index.html">previous post</a>, I examine how kriging and Gaussian process regression can be formulated as Bayesian linear regression. The posterior mean is the kriging predictor. This post is about what happens when observations are <em>areas</em> rather than points — the area-to-area (ATA) kriging problem — and why the choice of basis functions is not incidental but central to making the problem tractable.</p>
+<section id="the-naive-approach-is-expensive" class="level2">
+<h2 class="anchored" data-anchor-id="the-naive-approach-is-expensive">The naive approach is expensive</h2>
 <p>Classical point-referenced kriging predicts <span class="math inline">\(v(s_0)\)</span> from observations <span class="math inline">\(y_1, \ldots, y_n\)</span> using the covariance structure of the field. When each observation <span class="math inline">\(y_i\)</span> is actually an areal average over a footprint <span class="math inline">\(D_i\)</span>,</p>
 <p><span class="math display">\[y_i = \frac{1}{|D_i|}\int_{D_i} v(s)\,ds + \varepsilon_i\]</span></p>
 <p>the covariance between two observations involves a <em>double integral</em> over each pair of footprints:</p>
 <p><span class="math display">\[\mathrm{Cov}(y_i, y_j) = \frac{1}{|D_i||D_j|}\iint_{D_i \times D_j} C(s,t)\,ds\,dt\]</span></p>
-<p>With <span class="math inline">\(n\)</span> observations this requires <span class="math inline">\(O(n^2)\)</span> double integrals — one for every pair. For <span class="math inline">\(n = 10{,}000\)</span> satellite soundings and footprints that may be kilometres across, this is not just slow but often treated as a non-starter. Pretending each footprint is a point at its centroid avoids the double integrals, but as we show below it miscalibrates uncertainty in a systematic way.</p>
-<p>None of the twelve methods in the <span class="citation" data-cites="heaton2019case">@heaton2019case</span> competition were designed for areal observations. They are all point methods. This is not a critique — the competition dataset happened to be on a regular grid with small effective footprints — but it means the ATA problem is genuinely open for the irregular footprint settings common in satellite remote sensing. However, the vast majority of the big-<span class="math inline">\(n\)</span> point kriging methods in the competition are also <em>basis function</em> methods, which, as I will argue, means they are likely extendable to areal data.</p>
+<p>With <span class="math inline">\(n\)</span> observations this requires <span class="math inline">\(O(n^2)\)</span> double integrals — one for every pair. For <span class="math inline">\(n = 10{,}000\)</span> satellite soundings and footprints that may be kilometres across, this is not just slow but often treated as a non-starter. That would require 100 million <strong>double integrals</strong> just to build the covariance matrix. Pretending each footprint is a point at its centroid avoids the double integrals, but as we show below it miscalibrates uncertainty in a systematic way.</p>
+<p>None of the twelve methods in the <span class="citation" data-cites="heaton2019case">(<a href="#ref-heaton2019case" role="doc-biblioref"><strong>heaton2019case?</strong></a>)</span> competition were designed for areal observations. They are all point methods. This is not a critique — the competition dataset happened to be on a regular grid with small effective footprints — but it means the ATA problem is genuinely open for the irregular footprint settings common in satellite remote sensing. However, the vast majority of the big-<span class="math inline">\(n\)</span> point kriging methods in the competition are also <em>basis function</em> methods, which, as I will argue, means they are likely extendable to areal data.</p>
 </section>
 <section id="basis-functions-reduce-on2-to-on" class="level2">
 <h2 class="anchored" data-anchor-id="basis-functions-reduce-on2-to-on">Basis functions reduce <span class="math inline">\(O(n^2)\)</span> to <span class="math inline">\(O(n)\)</span></h2>
@@ -222,7 +253,7 @@ window.Quarto = {
 <section id="what-makes-a-good-basis" class="level2">
 <h2 class="anchored" data-anchor-id="what-makes-a-good-basis">What makes a good basis?</h2>
 <p>A desirable property is that the basis and prior <span class="math inline">\(Q\)</span> should correspond to a known and well-understood covariance model so that parameters have interpretable meaning and can be estimated from data. Secondarily, it is a very convenient property if the basis has closed-form integrals.</p>
-<p>The SPDE approach of <span class="citation" data-cites="lindgren2011explicit">@lindgren2011explicit</span> satisfies both. It begins from the observation that a Matérn Gaussian random field is the stationary solution to the stochastic partial differential equation</p>
+<p>The SPDE approach of <span class="citation" data-cites="lindgren2011explicit">Lindgren, Rue, and Lindström (<a href="#ref-lindgren2011explicit" role="doc-biblioref">2011</a>)</span> satisfies both. It begins from the observation that a Matérn Gaussian random field is the stationary solution to the stochastic partial differential equation</p>
 <p><span class="math display">\[(\kappa^2 - \Delta)^{\alpha/2} v(s) = \mathcal{W}(s)\]</span></p>
 <p>where <span class="math inline">\(\Delta\)</span> is the Laplacian, <span class="math inline">\(\mathcal{W}(s)\)</span> is Gaussian white noise, <span class="math inline">\(\kappa\)</span> controls the range, and <span class="math inline">\(\alpha = \nu + d/2\)</span> for smoothness <span class="math inline">\(\nu\)</span> in <span class="math inline">\(d\)</span> dimensions. Discretizing this equation via finite elements on a triangular mesh produces piecewise linear tent functions as the basis, and the precision matrix <span class="math inline">\(Q\)</span> is sparse and derived directly from the SPDE operator — so it correctly represents a Matérn covariance by construction. Lindgren also provides results for using indicator functions on a raster grid.</p>
 <p>The single integrals <span class="math inline">\(A_{ik} = \frac{1}{|D_i|}\int_{D_i} \phi_k(s)\,ds\)</span> for tent functions or indicator functions reduce to polygo intersection areas, computable exactly via standard computational geometry. No quadrature, no approximation error, no dependence on footprint resolution.</p>
@@ -230,13 +261,12 @@ window.Quarto = {
 </section>
 <section id="why-well-start-with-it-spde-won-the-satellite-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="why-well-start-with-it-spde-won-the-satellite-dataset">Why we’ll start with it: SPDE won the satellite dataset</h2>
-<p>In the <span class="citation" data-cites="heaton2019case">@heaton2019case</span> competition, the SPDE/INLA method achieved the best RMSE on the real satellite surface temperature data (1.53) and was a top-performer on their simulation. The simulated data competition was won by MRA (0.83 RMSE), which uses a different approximation strategy well-suited to the known covariance structure of simulated data.</p>
-<p>The satellite reversal is telling. Real satellite data has genuine nonstationarity and anisotropy — the estimated spectrum is visibly anisotropic, with longer correlation in one direction than another. Methods that assumed a fixed parametric isotropic Matérn suffered; the SPDE triangulation mesh, being irregular and adaptive, handled this more gracefully.</p>
-<p>The overcoverage of SPDE on the simulated dataset (coverage 1.00, nominal 0.90) is a separate issue rooted in implementation rather than methodology: the mesh spacing was ~6 miles while the data grid spacing was ~0.5 miles, meaning roughly 100 observations were averaged per mesh node. At that resolution the nugget becomes unidentifiable — the fine-scale variation that distinguishes nugget from smooth field is averaged away. The practical fix is to pre-estimate the nugget separately or use a mesh matching the data resolution.</p>
+<p>In the <span class="citation" data-cites="heaton2019case">(<a href="#ref-heaton2019case" role="doc-biblioref"><strong>heaton2019case?</strong></a>)</span> competition–see <a href="../posts/kriging-competition/index.Rmd"><em>my writeup</em></a> for a summary–the SPDE/INLA method achieved the best RMSE on the real satellite surface temperature data (1.53 RMSE) and was a top-performer on their simulation both in terms of speed and accuracy. Not only this, but their results hold for regular lattices, whose integrals are trivial to compute using area calculations available in common spatial packages like <code>sf</code>.</p>
+<p>While it’s a clear first-attempt to port to the areal setting, several methods are likely low-hanging-fruit as well. For example, another top performer for point-referenced data, LatticeKrig, uses a similarly motivated basis structure (with an intended spatially autoregressive prior) and would likely be easy to import to an areal setting. LatticeKrig uses basis functions are radial polynomials–which adds a step for integration beyond areal averages, but would not be challenging to integrate over triangulations.</p>
 </section>
 <section id="the-connection-to-sar-models-on-regular-grids" class="level2">
 <h2 class="anchored" data-anchor-id="the-connection-to-sar-models-on-regular-grids">The connection to SAR models on regular grids</h2>
-<p><span class="citation" data-cites="lindgren2011explicit">@lindgren2011explicit</span> is primarily presented as a triangulation method, but they also establish a clean result for regular grids that we will use. Using indicator functions as a basis is highly interpretable in terms of overlapping geometries over target regions.</p>
+<p><span class="citation" data-cites="lindgren2011explicit">Lindgren, Rue, and Lindström (<a href="#ref-lindgren2011explicit" role="doc-biblioref">2011</a>)</span> is primarily presented as a triangulation method, but they also establish a clean result for regular grids that we will use. Using indicator functions as a basis is highly interpretable in terms of overlapping geometries over target regions.</p>
 <p>On a regular grid with spacing <span class="math inline">\(\delta\)</span>, the SPDE <span class="math inline">\((\kappa^2 - \Delta)^{\alpha/2}v = \mathcal{W}\)</span> is discretized via finite differences rather than finite elements. For <span class="math inline">\(\alpha = 2\)</span> (corresponding to <span class="math inline">\(\nu = 1\)</span> in two dimensions), the discrete Laplacian at interior grid point <span class="math inline">\(s_i\)</span> is</p>
 <p><span class="math display">\[\Delta v(s_i) \approx v(s_{i-1,j}) + v(s_{i+1,j}) + v(s_{i,j-1}) + v(s_{i,j+1}) - 4v(s_i)\]</span></p>
 <p>Substituting into the SPDE gives</p>
@@ -297,12 +327,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The three panels show predictions at 40×40, 80×80, and 200×200 resolution from the same fitted model. Adding resolution costs only basis function evaluations, not model re-estimation.</p>
+<p>The three panels show predictions at 40×40, 80×80, and 200×200 resolution from the same fitted model. Adding resolution costs only basis function evaluations, not model re-estimation (though there may be some open questions as to what resolution of SAR model is necessary to get good estimates of these parameters, they still inherit properties of whatever procedure is used <em>for the SAR model</em>, such guarantees from maximum likelihood).</p>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>The ATA problem reduces from <span class="math inline">\(O(n^2)\)</span> double integrals to <span class="math inline">\(O(nK)\)</span> single integrals whenever the covariance structure is encoded in a prior <span class="math inline">\(Q\)</span> on basis coefficients rather than built directly from <span class="math inline">\(C(s,t)\)</span>. Two things must be true for this to work: the basis functions must integrate over polygon footprints in closed form, and <span class="math inline">\(Q\)</span> must correctly represent the target covariance.</p>
-<p>The SPDE framework of <span class="citation" data-cites="lindgren2011explicit">@lindgren2011explicit</span> satisfies both conditions for Matérn fields — by construction, since <span class="math inline">\(Q\)</span> is derived directly from the SPDE operator. On a regular grid this recovers the SAR model exactly, establishing a clean parameter correspondence with classical lattice statistics. The Fourier basis inherits this correspondence and adds resolution flexibility, at the cost of a dense rather than sparse <span class="math inline">\(A\)</span> matrix.</p>
+<p>The ATA problem reduces from <span class="math inline">\(O(n^2)\)</span> double integrals to <span class="math inline">\(O(nK)\)</span> single integrals whenever the covariance structure is encoded in a prior <span class="math inline">\(Q\)</span> on basis coefficients rather than built directly from <span class="math inline">\(C(s,t)\)</span>. Two things are convenient for this to work: the basis functions must be integrable over footprints in closed form (or via quadrature), and <span class="math inline">\(Q\)</span> must adequately represent the target covariance.</p>
+<p>The SPDE framework of <span class="citation" data-cites="lindgren2011explicit">Lindgren, Rue, and Lindström (<a href="#ref-lindgren2011explicit" role="doc-biblioref">2011</a>)</span> satisfies both conditions for Matérn fields — by construction, since <span class="math inline">\(Q\)</span> is derived directly from the SPDE operator. On a regular grid this recovers the SAR model exactly, establishing a clean parameter correspondence with classical lattice statistics. The Fourier basis inherits this correspondence and adds resolution flexibility, at the cost of a dense rather than sparse <span class="math inline">\(A\)</span> matrix.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -359,9 +389,14 @@ window.Quarto = {
 </table>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-lindgren2011explicit" class="csl-entry" role="listitem">
+Lindgren, Finn, Håvard Rue, and Johan Lindström. 2011. <span>“An Explicit Link Between <span>G</span>aussian Fields and <span>G</span>aussian <span>M</span>arkov Random Fields: The Stochastic Partial Differential Equation Approach.”</span> <em>Journal of the Royal Statistical Society: Series B</em> 73 (4): 423–98.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
