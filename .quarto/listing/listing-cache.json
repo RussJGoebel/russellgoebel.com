@@ -7,11 +7,14 @@
     "posts.qmd": [
       "posts"
     ],
-    "projects.qmd": [
-      "projects/*/index.qmd"
-    ],
     "projects\\spatialbasis\\index.qmd": [
       "posts/*.qmd"
+    ],
+    "projects\\spatintegrate\\index.qmd": [
+      "posts/*.qmd"
+    ],
+    "projects.qmd": [
+      "projects/*/index.qmd"
     ]
   }
 }

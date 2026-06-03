@@ -40,5 +40,29 @@
   },
   "projects/spatialbasis/posts/spatial-confounding.qmd": {
     "spatial-confounding.html": "62cd324e"
+  },
+  "posts/kriging-gp-equivalence/index.qmd": {
+    "index.html": "e13a0d5f"
+  },
+  "projects/spatintegrate/index.qmd": {
+    "index.html": "679b9d9f"
+  },
+  "projects/spatintegrate/posts/qmc.qmd": {
+    "qmc.html": "78dd2503"
+  },
+  "posts/kriging-lindgren-SAR/index.qmd": {
+    "index.html": "c3ff905c"
+  },
+  "posts/kriging-lindgren-SAR/index.knit.md": {
+    "index.knit.html": "a982b817"
+  },
+  "posts/kriging-competition/index.Rmd": {
+    "index.html": "2c8ccf89"
+  },
+  "slides/fastblm_and_spatintegrate.qmd": {
+    "fastblm_and_spatintegrate.html": "845d61ed"
+  },
+  "slides/fastblm_and_spatintegrate.knit.md": {
+    "fastblm_and_spatintegrate.knit.html": "a03648e7"
   }
 }

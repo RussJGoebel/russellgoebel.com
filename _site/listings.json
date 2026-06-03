@@ -1,30 +1,15 @@
 [
   {
-    "listing": "/index.html",
-    "items": [
-      "/posts/first-post.html",
-      "/projects/spatialbasis/posts/correlation-structure.html",
-      "/projects/spatialbasis/posts/covariates.html",
-      "/projects/spatialbasis/posts/cross-validation.html",
-      "/projects/spatialbasis/posts/g-function.html",
-      "/projects/spatialbasis/posts/spatial-confounding.html"
-    ]
-  },
-  {
-    "listing": "/posts.html",
-    "items": [
-      "/posts/first-post.html",
-      "/projects/spatialbasis/posts/correlation-structure.html",
-      "/projects/spatialbasis/posts/covariates.html",
-      "/projects/spatialbasis/posts/cross-validation.html",
-      "/projects/spatialbasis/posts/g-function.html",
-      "/projects/spatialbasis/posts/spatial-confounding.html"
-    ]
-  },
-  {
     "listing": "/projects.html",
     "items": [
-      "/projects/spatialbasis/index.html"
+      "/projects/spatialbasis/index.html",
+      "/projects/spatintegrate/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/spatintegrate/index.html",
+    "items": [
+      "/projects/spatintegrate/posts/qmc.html"
     ]
   },
   {
@@ -35,6 +20,36 @@
       "/projects/spatialbasis/posts/cross-validation.html",
       "/projects/spatialbasis/posts/g-function.html",
       "/projects/spatialbasis/posts/spatial-confounding.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/kriging-competition/index.html",
+      "/posts/kriging-lindgren-SAR/index.html",
+      "/posts/kriging-gp-equivalence/index.html",
+      "/posts/first-post.html",
+      "/projects/spatialbasis/posts/correlation-structure.html",
+      "/projects/spatialbasis/posts/covariates.html",
+      "/projects/spatialbasis/posts/cross-validation.html",
+      "/projects/spatialbasis/posts/g-function.html",
+      "/projects/spatialbasis/posts/spatial-confounding.html",
+      "/projects/spatintegrate/posts/qmc.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/kriging-competition/index.html",
+      "/posts/kriging-lindgren-SAR/index.html",
+      "/posts/kriging-gp-equivalence/index.html",
+      "/posts/first-post.html",
+      "/projects/spatialbasis/posts/correlation-structure.html",
+      "/projects/spatialbasis/posts/covariates.html",
+      "/projects/spatialbasis/posts/cross-validation.html",
+      "/projects/spatialbasis/posts/g-function.html",
+      "/projects/spatialbasis/posts/spatial-confounding.html",
+      "/projects/spatintegrate/posts/qmc.html"
     ]
   }
 ]

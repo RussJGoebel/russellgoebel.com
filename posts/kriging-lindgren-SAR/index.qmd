@@ -1,0 +1,398 @@
+---
+title: "Area-to-area kriging with basis functions"
+date: 2026-05-17
+description: "Satellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly."
+categories: [spatial statistics, downscaling, bayesian, kriging]
+---
+
+In a [previous post](LINK), we showed that kriging is Bayesian linear regression:
+choose basis functions, integrate them over observation regions to build $A$, place a
+Gaussian prior on the coefficients, and the posterior mean is the kriging predictor.
+This post is about what happens when observations are *areas* rather than points —
+the area-to-area (ATA) kriging problem — and why the choice of basis functions is
+not incidental but central to making the problem tractable.
+
+## The naive approach fails
+
+Classical point-referenced kriging predicts $v(s_0)$ from observations
+$y_1, \ldots, y_n$ using the covariance structure of the field. When each observation
+$y_i$ is actually an areal average over a footprint $D_i$,
+
+$$y_i = \frac{1}{|D_i|}\int_{D_i} v(s)\,ds + \varepsilon_i$$
+
+the covariance between two observations involves a *double integral* over each pair
+of footprints:
+
+$$\mathrm{Cov}(y_i, y_j) = \frac{1}{|D_i||D_j|}\iint_{D_i \times D_j} C(s,t)\,ds\,dt$$
+
+With $n$ observations this requires $O(n^2)$ double integrals — one for every pair.
+For $n = 10{,}000$ satellite soundings and footprints that may be kilometres across,
+this is not just slow but often treated as a non-starter. Pretending each footprint is a point
+at its centroid avoids the double integrals, but as we show below it miscalibrates
+uncertainty in a systematic way.
+
+None of the twelve methods in the @heaton2019case competition were designed for areal
+observations. They are all point methods. This is not a critique — the competition
+dataset happened to be on a regular grid with small effective footprints — but it
+means the ATA problem is genuinely open for the irregular footprint settings common
+in satellite remote sensing. However, the vast majority of the big-$n$ point kriging methods in the competition are also *basis function* methods, which, as I will argue, means they are likely extendable to areal data.
+
+## Basis functions reduce $O(n^2)$ to $O(n)$
+
+A basis function approach dissolves the double-integral problem. Represent the field
+as $v(s) \approx \sum_k \beta_k \phi_k(s)$ and substitute:
+
+$$y_i = \frac{1}{|D_i|}\int_{D_i} \sum_k \beta_k \phi_k(s)\,ds + \varepsilon_i
+= \sum_k \beta_k \underbrace{\frac{1}{|D_i|}\int_{D_i} \phi_k(s)\,ds}_{A_{ik}} + \varepsilon_i$$
+
+This gives the Bayesian linear model $y = A\beta + \varepsilon$ with prior
+$\beta \sim \mathcal{N}(0, Q^{-1})$. Each entry $A_{ik}$ requires a *single* integral
+of one basis function over one footprint — $O(nK)$ integrals total, where $K$ is the
+number of basis functions. The cross-covariance structure between all pairs of
+footprints is handled implicitly through the prior: the implied covariance between
+$y_i$ and $y_j$ is $A_i Q^{-1} A_j^\top$, computed as matrix multiplication rather
+than double integration.
+
+This reduction from $O(n^2)$ double integrals to $O(nK)$ single integrals is not
+free — it depends entirely on $Q$ being chosen to accurately represent the covariance
+structure of the field. A poorly chosen prior produces a model that is computationally
+cheap but statistically wrong. The choice of basis and prior is everything.
+
+## What makes a good basis?
+
+A desirable property is that the basis and prior $Q$ should correspond to a known and well-understood covariance model so that parameters have interpretable meaning and can be estimated from data. Secondarily, it is a very convenient property if the basis has closed-form integrals.
+
+The SPDE approach of @lindgren2011explicit satisfies both. It begins from the
+observation that a Matérn Gaussian random field is the stationary solution to the
+stochastic partial differential equation
+
+$$(\kappa^2 - \Delta)^{\alpha/2} v(s) = \mathcal{W}(s)$$
+
+where $\Delta$ is the Laplacian, $\mathcal{W}(s)$ is Gaussian white noise, $\kappa$
+controls the range, and $\alpha = \nu + d/2$ for smoothness $\nu$ in $d$ dimensions.
+Discretizing this equation via finite elements on a triangular mesh produces piecewise
+linear tent functions as the basis, and the precision matrix $Q$ is sparse and
+derived directly from the SPDE operator — so it correctly represents a Matérn
+covariance by construction. Lindgren also provides results for using indicator functions on a raster grid.
+
+The single integrals $A_{ik} = \frac{1}{|D_i|}\int_{D_i} \phi_k(s)\,ds$ for tent
+functions or indicator functions reduce to polygo intersection areas, computable exactly via
+standard computational geometry. No quadrature, no approximation error, no dependence
+on footprint resolution.
+
+It is noteworthy that many other basis function types are easy to integrate. For instance, sinusoidal bases have closed-form integrals over triangulations, making periodic or Fourier bases feasible (but dense); while compactly supported polynomials such as used in LatticeKrig are also promisingly adapted to the areal setting.
+
+## Why we'll start with it: SPDE won the satellite dataset
+
+In the @heaton2019case competition, the SPDE/INLA method achieved the best RMSE on
+the real satellite surface temperature data (1.53) and was a top-performer on their simulation. The simulated data competition was won by MRA (0.83 RMSE), which uses
+a different approximation strategy well-suited to the known covariance structure of
+simulated data.
+
+The satellite reversal is telling. Real satellite data has genuine nonstationarity
+and anisotropy — the estimated spectrum is visibly anisotropic, with longer correlation
+in one direction than another. Methods that assumed a fixed parametric isotropic
+Matérn suffered; the SPDE triangulation mesh, being irregular and adaptive, handled
+this more gracefully.
+
+The overcoverage of SPDE on the simulated dataset (coverage 1.00, nominal 0.90) is
+a separate issue rooted in implementation rather than methodology: the mesh spacing
+was ~6 miles while the data grid spacing was ~0.5 miles, meaning roughly 100
+observations were averaged per mesh node. At that resolution the nugget becomes
+unidentifiable — the fine-scale variation that distinguishes nugget from smooth
+field is averaged away. The practical fix is to pre-estimate the nugget separately
+or use a mesh matching the data resolution.
+
+## The connection to SAR models on regular grids
+
+@lindgren2011explicit is primarily presented as a triangulation method, but they
+also establish a clean result for regular grids that we will use. Using indicator functions as a basis is highly interpretable in terms of overlapping geometries over target regions.
+
+On a regular grid with spacing $\delta$, the SPDE $(\kappa^2 - \Delta)^{\alpha/2}v = \mathcal{W}$ is discretized via finite differences rather than finite elements. For
+$\alpha = 2$ (corresponding to $\nu = 1$ in two dimensions), the discrete Laplacian
+at interior grid point $s_i$ is
+
+$$\Delta v(s_i) \approx v(s_{i-1,j}) + v(s_{i+1,j}) + v(s_{i,j-1}) + v(s_{i,j+1}) - 4v(s_i)$$
+
+Substituting into the SPDE gives
+
+$$(\kappa^2 + 4)v(s_i) - \sum_{j \in N(i)} v(s_j) = \mathcal{W}(s_i)$$
+
+which in matrix form is $Bv = \varepsilon$ where $B_{ii} = \kappa^2 + 4$ and
+$B_{ij} = -1$ for rook neighbours. The precision matrix $Q = B^\top B / \sigma^2$
+is exactly the precision of a **simultaneous autoregressive (SAR)** model with
+rook neighbourhood structure. This is not an approximation — the finite-difference
+discretization of the $\alpha=2$ SPDE *is* the rook SAR model.
+
+The parameter correspondence is explicit. The SAR model has autoregressive
+parameter $\rho$ and the SPDE has range parameter $\kappa$, related by
+
+$$\kappa^2 = \frac{4(1-\rho)}{\rho\,\delta^2}$$
+
+which gives the range in terms of $\rho$ and grid spacing $\delta$:
+
+$$\text{range} = \sqrt{8/\kappa^2} = \delta\sqrt{\frac{2\rho}{1-\rho}}$$
+
+This means fitting a SAR model and translating its $\rho$ back to a Matérn range
+is exact for $\alpha=2$, and approximately valid for other smoothness values.
+
+For the basis function representation on a regular grid the natural choice is
+indicator functions — $\phi_j(s) = \mathbf{1}(s \in D_j)$, one per grid cell.
+Then $A_{ik} = |D_i \cap D_k| / |D_i|$ is the area overlap fraction, computable
+exactly via polygon intersection. The SAR precision $Q = B^\top B / \sigma^2$
+is the correct prior for this basis under the SPDE connection.
+
+## Simulation: does the area correction matter?
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE, comment="#>", echo=FALSE,
+  fig.width=7, fig.height=4.5, dpi=150,
+  message=FALSE, warning=FALSE
+)
+library(spatintegrate); library(fastblm); library(sf)
+library(Matrix); library(spdep); library(ggplot2)
+library(future); library(future.apply)
+
+theme_post <- function()
+  theme_minimal(base_size=12) +
+  theme(panel.border=element_rect(fill=NA, colour="grey70"))
+
+domain_bbox <- c(0, 0, 10e3, 10e3)
+range_true  <- 3e3/3; sigma2_true <- 1.0; sigma_e <- 0.15
+kappa_true  <- sqrt(8) / range_true
+
+make_footprint <- function(cx, cy, w=1300, h=2300, deg=15) {
+  a <- deg*pi/180; R <- matrix(c(cos(a),-sin(a),sin(a),cos(a)),2)
+  v <- matrix(c(-w/2,-h/2,w/2,-h/2,w/2,h/2,-w/2,h/2,-w/2,-h/2),
+              ncol=2,byrow=TRUE) %*% t(R)
+  v[,1] <- v[,1]+cx; v[,2] <- v[,2]+cy; sf::st_polygon(list(v))
+}
+make_rook_W <- function(grid_sf) {
+  nb<-spdep::poly2nb(grid_sf,queen=FALSE); n<-length(nb)
+  i_o<-rep(seq_len(n),lengths(nb)); j_o<-unlist(nb,use.names=FALSE)
+  n_nb<-lengths(nb); diag_idx<-which(n_nb<4L)
+  Matrix::sparseMatrix(i=c(i_o,diag_idx),j=c(j_o,diag_idx),
+    x=c(rep(1/4,length(i_o)),(4L-n_nb[diag_idx])/4),dims=c(n,n))
+}
+make_sar_Q <- function(grid_sf, rho)
+  Matrix::crossprod(Matrix::Diagonal(nrow(make_rook_W(grid_sf)))-rho*make_rook_W(grid_sf))
+
+fourier_fit_J <- function(J, fps_sf, domain_bbox, delta, rho_hat, phi_hat) {
+  fg  <- fourier_freq_grid(J=J, domain_bbox=domain_bbox)
+  A_f <- fourier_integrate_basis(fps_sf, fg)
+  Q_f <- fourier_sar_Q_fun(freq_grid=fg, delta=delta)(
+    c(logit_rho=qlogis(rho_hat), log_tau2=log(1)))$Q
+  Qi  <- Matrix::Diagonal(x=1/Matrix::diag(Q_f))
+  fit <- fit_fastblm(y, A_f, Q_f, phi=phi_hat, solver="woodbury", Q_inv=Qi)
+  list(J=J, fg=fg, A=A_f, fit=fit, fitted=as.numeric(A_f %*% fit$posterior_mean))
+}
+```
+
+```{r sim-field, include=FALSE, cache=TRUE}
+set.seed(42)
+grid_n <- 80; gx <- seq(0, 10e3, length.out=grid_n)
+xy <- expand.grid(x=gx, y=gx)
+D  <- as.matrix(dist(as.matrix(xy)))
+Cov <- sigma2_true * (1 + kappa_true*D) * exp(-kappa_true*D)
+L   <- chol(Cov + diag(1e-8, nrow(Cov)))
+set.seed(7); xy$truth <- as.numeric(crossprod(L, rnorm(nrow(xy))))
+
+n_obs <- 250
+cx <- runif(n_obs, 2.5e3, 7.5e3); cy <- runif(n_obs, 2.5e3, 7.5e3)
+fps_sf <- sf::st_sf(id=seq_len(n_obs),
+  geometry=sf::st_sfc(mapply(make_footprint,cx,cy,SIMPLIFY=FALSE),crs=32619))
+truth_sf <- sf::st_as_sf(xy, coords=c("x","y"), crs=32619)
+mu_areal <- vapply(seq_len(n_obs), function(i) {
+  ins <- sf::st_within(truth_sf, fps_sf[i,], sparse=FALSE)[,1]
+  if (!any(ins)) NA_real_ else mean(xy$truth[ins])
+}, numeric(1))
+keep <- !is.na(mu_areal)
+fps_sf <- fps_sf[keep,]; mu_areal <- mu_areal[keep]
+y <- mu_areal + rnorm(sum(keep), sd=sigma_e); n_obs <- length(y)
+```
+
+```{r build-grid-A, include=FALSE, cache=TRUE}
+domain_poly <- sf::st_as_sfc(
+  sf::st_bbox(setNames(domain_bbox,c("xmin","ymin","xmax","ymax")),crs=32619))
+sar_grid_sf <- sf::st_sf(
+  cell_id=seq_along(sf::st_make_grid(domain_poly,n=c(80,80))),
+  geometry=sf::st_make_grid(domain_poly,n=c(80,80)))
+delta <- sqrt(as.numeric(sf::st_area(sar_grid_sf[1,])))
+n_cells <- nrow(sar_grid_sf)
+
+A_areal <- compute_overlap_fractions(soundings=fps_sf,fine_grid=sar_grid_sf,sparse=TRUE)
+
+centroids <- sf::st_coordinates(sf::st_centroid(fps_sf))
+cell_ids  <- sf::st_within(
+  sf::st_as_sf(as.data.frame(centroids),coords=c("X","Y"),crs=32619),
+  sar_grid_sf, sparse=FALSE)
+centroid_cell <- apply(cell_ids, 1, function(r) if(any(r)) which(r)[1] else NA_integer_)
+keep2 <- !is.na(centroid_cell)
+A_point <- Matrix::sparseMatrix(
+  i=seq_len(n_obs)[keep2], j=centroid_cell[keep2],
+  x=rep(1,sum(keep2)), dims=c(n_obs,n_cells))
+```
+
+```{r fit-models, include=FALSE, cache=TRUE}
+future::plan(future::multisession, workers=5L)
+Q_fun_sar_ml <- function(theta) {
+  rho <- plogis(theta[["logit_rho"]]); Q <- make_sar_Q(sar_grid_sf, rho)
+  list(Q=Q, log_det_Q=as.numeric(Matrix::determinant(Q,logarithm=TRUE)$modulus))
+}
+fit_ml <- tune_ml(y=y, A=A_areal, Q_fun=Q_fun_sar_ml,
+  theta_init=c(logit_rho=qlogis(0.95)),
+  lower=c(logit_rho=qlogis(0.5)), upper=c(logit_rho=qlogis(0.999)), verbose=FALSE)
+rho_hat <- plogis(fit_ml$theta[["logit_rho"]]); phi_hat <- fit_ml$phi
+kappa2_hat <- 4*(1-rho_hat)/(rho_hat*delta^2); range_hat <- sqrt(8/kappa2_hat)
+
+Q_fit <- make_sar_Q(sar_grid_sf, rho_hat)
+Q_inv_fit <- function(v) as.numeric(Matrix::solve(Q_fit, v))
+fit_areal <- fit_fastblm(y,A_areal,Q_fit,phi=phi_hat,solver="woodbury",Q_inv=Q_inv_fit)
+fit_point <- fit_fastblm(y,A_point,Q_fit,phi=phi_hat,solver="woodbury",Q_inv=Q_inv_fit)
+fitted_areal <- as.numeric(A_areal %*% fit_areal$posterior_mean)
+fitted_point <- as.numeric(A_point %*% fit_point$posterior_mean)
+
+se_areal <- posterior_se(fit_areal, A_new=as.matrix(A_areal))
+se_point <- posterior_se(fit_point, A_new=as.matrix(A_point))
+z90 <- qnorm(0.95)
+covered_areal <- abs(mu_areal - fitted_areal) < z90 * se_areal
+covered_point <- abs(mu_areal[keep2] - fitted_point[keep2]) < z90 * se_point[keep2]
+```
+
+We simulate a Matérn($\nu=1$) field with range 3 km over a 10×10 km domain, then
+generate 250 satellite-style footprint observations — roughly 1.3 km × 2.3 km
+parallelograms at 15° rotation, representative of a low-Earth-orbit sounder. We fit
+two versions of the same SAR-prior model:
+
+- **Areal model:** $A_{ik}$ = area overlap fraction of footprint $i$ and cell $k$ —
+  the correct observation model.
+- **Point model:** $A_{ik} = 1$ for the single cell containing the footprint centroid,
+  0 elsewhere — the standard approximation used by all Heaton methods.
+
+Both use the same prior (tuned via marginal likelihood on the areal model) and the
+same noise variance $\phi$.
+
+```{r plot-setup, fig.height=4}
+ggplot() +
+  geom_raster(data=xy, aes(x,y,fill=truth)) +
+  geom_sf(data=fps_sf, fill=NA, colour="white", linewidth=0.3, alpha=0.5) +
+  scale_fill_distiller(palette="RdYlBu") +
+  labs(title=sprintf("Matérn field (range = %.0f km) with %d footprints",
+                     range_true/1e3, n_obs),
+       x="Easting (m)", y="Northing (m)", fill="v(s)") +
+  coord_sf() + theme_post()
+```
+
+```{r plot-coverage-rate}
+cov_df <- data.frame(
+  model    = c("Areal (correct)", "Point centroid"),
+  coverage = c(mean(covered_areal), mean(covered_point)),
+  nominal  = 0.90
+)
+ggplot(cov_df, aes(model, coverage, fill=model)) +
+  geom_col(width=0.5, show.legend=FALSE) +
+  geom_hline(yintercept=0.90, linetype=2) +
+  scale_y_continuous(limits=c(0,1), labels=scales::percent) +
+  scale_fill_manual(values=c("Areal (correct)"="steelblue","Point centroid"="firebrick")) +
+  labs(title="90% posterior credible interval coverage",
+       subtitle="Dashed line = nominal 90%",
+       x=NULL, y="Coverage") +
+  theme_post()
+```
+
+The point approximation systematically miscalibrates uncertainty. Footprints
+spanning regions of high spatial variability are most affected — the observation
+model treats a 3 km footprint as if it were a point, ignoring the spatial averaging
+that reduces the effective noise. The areal model, because it correctly propagates
+the footprint geometry into $A$, gives calibrated intervals at the nominal rate.
+
+## Swapping to a Fourier basis: free given the SAR fit
+
+Once the SAR parameters $(\rho, \phi)$ are estimated, there is a natural alternative
+basis that inherits the same covariance structure: the Neumann cosine functions
+
+$$\phi_{\mathbf{j}}(s) = \prod_{k=1}^2 \sqrt{2-\delta_{j_k,1}}\,
+\cos\!\left(\frac{(j_k-1)\pi s_k}{L_k}\right)$$
+
+These diagonalize the SAR precision matrix exactly — the prior $Q$ is diagonal in this
+basis, with eigenvalues given analytically by the SAR parameter $\rho$:
+
+$$Q_{\text{Fourier},\mathbf{j}} = \frac{(1-\rho\lambda_{W,\mathbf{j}})^2}{\tau^2}$$
+
+where $\lambda_{W,\mathbf{j}}$ are the eigenvalues of the rook weight matrix $W$.
+No re-estimation is needed: $\rho$ and $\phi$ translate directly from the SAR fit.
+
+The key advantage for ATA kriging is that the integrals $A_{ik} = \frac{1}{|D_i|}
+\int_{D_i} \cos(\omega_x s_x)\cos(\omega_y s_y)\,ds$ have exact closed forms via the
+identity $\cos(A)\cos(B) = \frac{1}{2}[\cos(A-B)+\cos(A+B)]$ and the complex
+exponential triangle formula. Like the SPDE/INLA tent function integrals, these are
+exact — no quadrature error, no dependence on footprint resolution.
+
+The Fourier basis also decouples prediction resolution from fitting resolution. The
+SAR raster model is tied to an 80×80 grid; the Fourier model with the same fitted
+parameters predicts at any resolution by evaluating the basis functions at new
+locations, with no refitting required.
+
+```{r fit-fourier, include=FALSE, cache=TRUE}
+tol <- 0.005
+prev <- fourier_fit_J(10, fps_sf, domain_bbox, delta, rho_hat, phi_hat)
+final_f <- prev
+for (J_now in c(20, 40, 60, 80)) {
+  curr <- fourier_fit_J(J_now, fps_sf, domain_bbox, delta, rho_hat, phi_hat)
+  if (sqrt(mean((curr$fitted - prev$fitted)^2)) < tol) { final_f <- curr; break }
+  prev <- curr; final_f <- curr
+}
+```
+
+```{r plot-multiresolution, fig.height=8}
+fourier_evaluate <- function(coords, fg) {
+  ox <- fg$omega_mat[,1]; oy <- fg$omega_mat[,2]; nc <- fg$norm_const
+  sx <- as.matrix(coords)[,1]; sy <- as.matrix(coords)[,2]
+  sweep(cos(outer(sx,ox)) * cos(outer(sy,oy)), 2, nc, `*`)
+}
+grids <- list(
+  "Coarse (40×40)"  = expand.grid(x=seq(0,10e3,l=40),  y=seq(0,10e3,l=40)),
+  "Medium (80×80)"  = expand.grid(x=seq(0,10e3,l=80),  y=seq(0,10e3,l=80)),
+  "Fine (200×200)"  = expand.grid(x=seq(0,10e3,l=200), y=seq(0,10e3,l=200))
+)
+pred_df <- do.call(rbind, Map(function(nm,g) {
+  Phi <- fourier_evaluate(g, final_f$fg)
+  cbind(g, pred=as.numeric(Phi %*% final_f$fit$posterior_mean), res=nm)
+}, names(grids), grids))
+ggplot(pred_df, aes(x,y,fill=pred)) +
+  geom_raster() + facet_wrap(~res, ncol=1) +
+  scale_fill_distiller(palette="RdYlBu") + coord_equal() +
+  labs(title="Fourier-SAR posterior mean at three resolutions",
+       subtitle="Same fitted coefficients — no refitting",
+       x="Easting (m)", y="Northing (m)", fill="v̂(s)") +
+  theme_post()
+```
+
+The three panels show predictions at 40×40, 80×80, and 200×200 resolution from
+the same fitted model. Adding resolution costs only basis function evaluations,
+not model re-estimation.
+
+## Summary
+
+The ATA problem reduces from $O(n^2)$ double integrals to $O(nK)$ single integrals
+whenever the covariance structure is encoded in a prior $Q$ on basis coefficients
+rather than built directly from $C(s,t)$. Two things must be true for this to work:
+the basis functions must integrate over polygon footprints in closed form, and $Q$
+must correctly represent the target covariance.
+
+The SPDE framework of @lindgren2011explicit satisfies both conditions for Matérn
+fields — by construction, since $Q$ is derived directly from the SPDE operator. On
+a regular grid this recovers the SAR model exactly, establishing a clean parameter
+correspondence with classical lattice statistics. The Fourier basis inherits this
+correspondence and adds resolution flexibility, at the cost of a dense rather than
+sparse $A$ matrix.
+
+| | Areal SAR | Point SAR | Fourier-SAR |
+|---|---|---|---|
+| **Observation model** | Correct | Approximate | Correct |
+| **Integration** | Exact (overlap fractions) | None (centroid) | Exact (analytic) |
+| **Coverage** | Calibrated | Miscalibrated | Calibrated |
+| **Resolution** | Fixed grid | Fixed grid | Arbitrary |
+| **Prediction at new resolution** | Refit | Refit | Free |
+| **Prior** | SAR / Matérn | SAR / Matérn | Diagonal / Matérn |
