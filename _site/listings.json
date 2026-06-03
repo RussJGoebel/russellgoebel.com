@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/posts.html",
+    "listing": "/index.html",
     "items": [
       "/posts/kriging-competition/index.html",
       "/posts/kriging-lindgren-SAR/index.html",
@@ -8,7 +8,7 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/posts.html",
     "items": [
       "/posts/kriging-competition/index.html",
       "/posts/kriging-lindgren-SAR/index.html",
