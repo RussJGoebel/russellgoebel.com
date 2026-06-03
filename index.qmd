@@ -8,7 +8,7 @@ listing:
     max-items: 3
 ---
 
-I'm a statistician with a background in consulting and academic research. 
+I'm a statistician with a background in consulting and a specialty in spatial modeling. 
 I care about epistemology, rigor, and the gap between how statistics is 
 taught and how it's actually practiced.
 This site is where I think out loud — about statistical methods, data 
