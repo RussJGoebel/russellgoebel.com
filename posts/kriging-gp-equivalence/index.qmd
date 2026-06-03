@@ -48,7 +48,7 @@ whose posterior mean and variance are:
 $$\hat{\alpha} = (A^T \Sigma^{-1}A + Q)^{-1} A^T\Sigma^{-1}y$$
 
 $$\text{Var}(\alpha \mid y, Q, \Sigma) = (A^T\Sigma^{-1}A + Q)^{-1}$$
-In the following **tabset panels**, how to choose A and Q to match various kriging models is given. Several of the methods discussed here are drawn from @heaton2019case, a noteworthy paper in which the authors of each method implemented their own procedure and competed head-to-head on both simulated and real satellite surface temperature data. For these panels I choose a more straightforward way of expressing kriging predictions with a linear model (using identity matrices as designs and augmenting with prediction locations), but there is an equivalent functional version using [**covariance functions as basis functions**](#the-rkhs-view-covariance-functions-as-basis-functions) which connects to reproducing kernel Hilbert spaces.
+In the following **tabset panels**, how to choose A and Q to match various kriging models is given. For these panels I choose a more straightforward way of expressing kriging predictions with a linear model (using identity matrices as designs and augmenting with prediction locations), but there is an equivalent functional version using [**covariance functions as basis functions**](#the-rkhs-view-covariance-functions-as-basis-functions) which connects to reproducing kernel Hilbert spaces. Several of the methods discussed here are drawn from @heaton2019case, a noteworthy paper in which the authors of each method implemented their own procedure and competed head-to-head on both simulated and real satellite surface temperature data. 
 
 ::: {.panel-tabset}
 
