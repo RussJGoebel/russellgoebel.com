@@ -1,0 +1,179 @@
+---
+title: "Reductions in depression and anxiety among autistic adults participating in an intervention to promote healthy relationships"
+date: 2026-05-19
+description: "A longitudinal mixed-effects model assessing whether a six-session psychoeducational intervention reduced depression and anxiety in autistic adults. Discusses model selection, dropout and missing-at-random assumptions, and clinical versus statistical significance via the minimal important change framework."
+categories: [statistics, applied, mixed models]
+toc: true
+toc-depth: 2
+toc-location: left
+toc-title: "Methods"
+number-sections: false
+---
+
+::: {.disclaimer}
+
+*This project originated through consulting work with the Master's in Statistical Practice (MSSP) program at Boston University, where I served as a PhD Senior Consultant. In this role I led teams of 5 Master's students from client intake through modeling decisions, final write-ups, and presentations. This work resulted in a peer-reviewed publication in the American Journal of Occupational Therapy ([Holmes et al., 2023](https://research.aota.org/ajot/article-abstract/77/2/7702185070/24075/Reductions-in-Depression-and-Anxiety-Among?redirectedFrom=fulltext))*
+
+:::
+
+# Did the Healthy Relationships on the Autism Spectrum (HEARTS) course improve anxiety and depression in a pilot study?
+
+I was brought on as a lead statistician for a project designed to evaluate an online educational course for autistic individuals as an intervention towards depression and anxiety. The course, called Healthy Relationships on the Autism Spectrum (HEARTS), involved six 90-minute online class sessions in which participants learned about topics related to healthy relationships (such as setting boundaries or what constitutes a healthy versus unhealthy relationship). After each class participants filled out a questionnaire: using items rated on a 5-point Likert scale, raw scores are converted to two $t$-scores (one related to *anxiety* and the other *depression*) with a mean of 50 and standard deviation of 10.
+
+## Statistical Considerations for the data
+
+### Repeated Measures
+
+Individuals were assessed at six different time points. A standard approach in this setting is to use a longitudinal mixed-effects model. The mixed model accounts for similarity between measurements taken by the same individual by modeling both variation between individuals and within. A linear slope term is included by `week`, allowing inference as to whether the slope of `week` is negative.
+
+A simple alternative would be to run paired $t$-tests on the endpoints of the timeframe, but this can reduce power, and does not handle participant drop-outs gracefully.
+
+To avoid privacy concerns the data visualized in this post are synthetic. Trend lines with effects and errors similar to the study are visualized below -- despite variation between individuals, overall, anxiety and depression improved according to these scales. In the next sections I discuss some limitations and statistical concerns.
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(lme4)
+library(modelsummary)
+
+set.seed(42)
+
+n <- 55
+weeks <- 0:6
+
+random_intercepts <- rnorm(n, mean = 0, sd = 6)
+random_slopes <- rnorm(n, mean = 0, sd = 0.5)
+
+sim_data <- expand.grid(id = 1:n, week = weeks) |>
+    arrange(id, week) |>
+    mutate(
+        depression = 62 + random_intercepts[id] +
+            (-1.39 + random_slopes[id]) * week +
+            rnorm(n(), 0, 3),
+        anxiety = 65.59 + random_intercepts[id] +
+            (-0.99 + random_slopes[id]) * week +
+            rnorm(n(), 0, 3)
+    )
+
+mod_depression <- lmer(depression ~ week + (1 + week | id), data = sim_data)
+mod_anxiety    <- lmer(anxiety    ~ week + (1 + week | id), data = sim_data)
+
+mean_traj <- sim_data |>
+    group_by(week) |>
+    summarise(
+        dep_mean = mean(depression),
+        anx_mean = mean(anxiety),
+        dep_se   = sd(depression) / sqrt(n()),
+        anx_se   = sd(anxiety)    / sqrt(n())
+    )
+
+p_depression <- ggplot() +
+    geom_line(
+        data = sim_data,
+        aes(x = week, y = depression, group = id),
+        alpha = 0.15, color = "#4E79A7", linewidth = 0.3
+    ) +
+    geom_ribbon(
+        data = mean_traj,
+        aes(x = week, ymin = dep_mean - 1.96 * dep_se,
+            ymax = dep_mean + 1.96 * dep_se),
+        alpha = 0.25, fill = "#4E79A7"
+    ) +
+    geom_line(
+        data = mean_traj,
+        aes(x = week, y = dep_mean),
+        color = "#4E79A7", linewidth = 1.2
+    ) +
+    geom_hline(yintercept = 50, linetype = "dashed",
+               color = "gray40", linewidth = 0.5) +
+    annotate("text", x = 6.1, y = 50.8,
+             label = "Population\nmean (50)",
+             size = 3, color = "gray40", hjust = 0) +
+    scale_x_continuous(breaks = 0:6,
+                       labels = paste("Week", 0:6)) +
+    labs(
+        title    = "Depression scores over intervention",
+        subtitle = "Individual trajectories (faint) with mean trend and 95% CI",
+        x = NULL, y = "PROMIS Depression T-score",
+        caption  = "Simulated data based on published model estimates"
+    ) +
+    theme_minimal(base_size = 13) +
+    theme(
+        plot.title       = element_text(face = "bold"),
+        panel.grid.minor = element_blank(),
+        axis.text.x      = element_text(angle = 30, hjust = 1)
+    )
+
+p_anxiety <- ggplot() +
+    geom_line(
+        data = sim_data,
+        aes(x = week, y = anxiety, group = id),
+        alpha = 0.15, color = "#F28E2B", linewidth = 0.3
+    ) +
+    geom_ribbon(
+        data = mean_traj,
+        aes(x = week, ymin = anx_mean - 1.96 * anx_se,
+            ymax = anx_mean + 1.96 * anx_se),
+        alpha = 0.25, fill = "#F28E2B"
+    ) +
+    geom_line(
+        data = mean_traj,
+        aes(x = week, y = anx_mean),
+        color = "#F28E2B", linewidth = 1.2
+    ) +
+    geom_hline(yintercept = 50, linetype = "dashed",
+               color = "gray40", linewidth = 0.5) +
+    annotate("text", x = 6.1, y = 50.8,
+             label = "Population\nmean (50)",
+             size = 3, color = "gray40", hjust = 0) +
+    scale_x_continuous(breaks = 0:6,
+                       labels = paste("Week", 0:6)) +
+    labs(
+        title    = "Anxiety scores over intervention",
+        subtitle = "Individual trajectories (faint) with mean trend and 95% CI",
+        x = NULL, y = "PROMIS Anxiety T-score",
+        caption  = "Simulated data based on published model estimates"
+    ) +
+    theme_minimal(base_size = 13) +
+    theme(
+        plot.title       = element_text(face = "bold"),
+        panel.grid.minor = element_blank(),
+        axis.text.x      = element_text(angle = 30, hjust = 1)
+    )
+
+p_depression
+p_anxiety
+```
+
+Fixed-effect estimates from both models are shown below, closely reproducing the published results.
+
+```{r, message = FALSE, warning = FALSE}
+modelsummary(
+    list("Depression" = mod_depression, "Anxiety" = mod_anxiety),
+    statistic  = "conf.int",
+    conf_level = 0.95,
+    coef_rename = c("(Intercept)" = "Intercept", "week" = "Week"),
+    gof_map    = c("nobs", "r.squared"),
+    title      = "Mixed-effects model estimates (simulated data)",
+    notes      = "95% confidence intervals in brackets. Simulated data based on published model estimates."
+)
+```
+
+### Participation, Dropout and Missing-at-Random Assumptions
+
+Of the 98 people enrolled, only 55 were eligible for analysis (consenting and meeting minimum participation criterion). This criterion included participating in four or more of the sessions.
+
+One limitation of the study is that it is possible that there is a relationship between participants dropping out or attending few sessions and the outcome — heightened anxiety, depression, emotional burnout, or hospital stays are all plausible reasons someone might withdraw. Although mixed-effects models handle missing-at-random data gracefully, this assumption may be questionable here. If I were repeating the study, I would have conducted additional sensitivity analyses and assessed the plausibility of the MAR assumption using visualizations.
+
+### Minimal Important Change
+
+A relevant consideration is whether statistically significant effects are also *clinically* meaningful. Based on a literature review, the authors determined that a change of 1.5 to 3.7 points on the PROMIS Depression scale and 2.3 to 3.5 points on the PROMIS Anxiety scale constitutes a minimal important change (MIC) — the smallest within-person difference that patients themselves would consider meaningful.
+
+The mixed-effects model estimated improvements of 1.39 points per week for depression and 0.99 points per week for anxiety, accumulating to approximately 8.3 and 5.9 points respectively over 6 weeks — well above both MIC thresholds. So while the study is limited by its lack of a control group, the magnitude of change observed is not merely a statistical artifact of a large sample; it clears a clinically grounded bar.
+
+## Conclusion
+
+The results of this pilot study were promising. Both depression and anxiety scores declined meaningfully over the six-week intervention, with effect sizes exceeding the minimal important change thresholds established in the literature. The use of a longitudinal mixed-effects model was appropriate given the repeated-measures structure of the data and the presence of participant dropout.
+
+That said, the study has real limitations worth acknowledging. Without a control group, changes in scores cannot be attributed to HEARTS specifically — regression to the mean, the social benefits of group participation, or concurrent therapies could all contribute. The missing-at-random assumption embedded in the mixed-effects approach is also potentially violated given the reasons participants dropped out. These are limitations the authors note briefly but do not fully address statistically.
+
+As a pilot study, however, HEARTS achieved what it set out to do: demonstrate feasibility, signal a clinically meaningful effect, and make the case for a larger randomized controlled trial.

@@ -8,6 +8,14 @@
     ]
   },
   {
+    "listing": "/portfolio.html",
+    "items": [
+      "/portfolio/anxiety_course/index.html",
+      "/portfolio/chronic_cough/index.html",
+      "/portfolio/dehydration_in_skilled_nursing_home/index.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
       "/posts/kriging-competition/index.html",

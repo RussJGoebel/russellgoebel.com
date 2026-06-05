@@ -64,5 +64,20 @@
   },
   "slides/fastblm_and_spatintegrate.knit.md": {
     "fastblm_and_spatintegrate.knit.html": "a03648e7"
+  },
+  "portfolio/dehydration_in_skilled_nursing_home/index.qmd": {
+    "index.html": "b0a229a9"
+  },
+  "portfolio.qmd": {
+    "portfolio.html": "6ae2bfdb"
+  },
+  "portfolio/anxiety_course/index.qmd": {
+    "index.html": "9ed47851"
+  },
+  "portfolio/chronic_cough/index.qmd": {
+    "index.html": "0a569a83"
+  },
+  "cv.qmd": {
+    "cv.html": "13e16315"
   }
 }

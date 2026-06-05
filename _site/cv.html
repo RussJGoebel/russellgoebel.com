@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Writing – Russell Goebel</title>
+<title>Russell Goebel</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,70 +66,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -157,7 +97,7 @@ window.Quarto = {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./posts.html" aria-current="page"> 
+    <a class="nav-link" href="./posts.html"> 
 <span class="menu-text">Writing</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -176,7 +116,7 @@ window.Quarto = {
 <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./cv.html"> 
+    <a class="nav-link active" href="./cv.html" aria-current="page"> 
 <span class="menu-text">CV</span></a>
   </li>  
 </ul>
@@ -190,15 +130,13 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Writing</h1>
+<h1 class="title">Russell Goebel</h1>
 </div>
 
 
@@ -215,92 +153,164 @@ window.Quarto = {
 </header>
 
 
+<div class="cv-contact">
+<p>russjgoebel@gmail.com · 360-393-1557 · <a href="https://linkedin.com/in/russellgoebel/">linkedin.com/in/russellgoebel</a></p>
+</div>
+<div class="cv-download">
+<p><a href="Russell_Goebel_CV.pdf" class="btn btn-outline-primary">Download PDF</a></p>
+</div>
+<section id="education" class="level2">
+<h2 class="anchored" data-anchor-id="education">Education</h2>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>PhD in Statistics</strong> <em>Boston University</em></p>
+<p>Dissertation: <em>Bayesian Change-of-Support Modeling for Remote-Sensing Data: Scalable Inference Across Spatial Resolutions</em></p>
+<p>Advisor: Luis Carvalho</p>
+</div>
+<div class="cv-right">
+<p>2019–2026</p>
+</div>
+</div>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>BA in Statistics</strong> <em>Western Washington University</em></p>
+<p>Minor: English</p>
+</div>
+<div class="cv-right">
+<p>2015–2019</p>
+</div>
+</div>
+</section>
+<section id="research-interests" class="level2">
+<h2 class="anchored" data-anchor-id="research-interests">Research Interests</h2>
+<p>Bayesian spatial modeling; change-of-support methods; scalable inference for large spatial datasets; spectral and low-rank approximations to spatial processes; longitudinal and mixed-effects modeling in health research.</p>
+</section>
+<section id="publications" class="level2">
+<h2 class="anchored" data-anchor-id="publications">Publications</h2>
+<p><strong>Peer-Reviewed Articles</strong></p>
+<ul>
+<li><p>Canter, B. E., Goebel, R., Kulkarni, V., Mak, W., Falvey, J., &amp; Boockvar, K. (2024). Associations between eating, mobility, and toileting functional dependence and COVID-19 symptoms. <em>Journal of the American Medical Directors Association</em>, 25(2), 342–347.</p></li>
+<li><p>Holmes, L. G., Goebel, R. J., Hollingue, C., Zhu, S., Zhang, H., Shan, W., … &amp; Rothman, E. F. (2023). Reductions in depression and anxiety among autistic adults participating in an intervention to promote healthy relationships. <em>The American Journal of Occupational Therapy</em>, 77(2), 7702185070.</p></li>
+<li><p>Amador, R., Goebel, R., Noordzij, J. P., Bhatt, N. K., Cohen, S., Daniels, K., … &amp; Krisciunas, G. P. (2023). A systematic review and meta-analysis of neuromodulators to treat chronic airway hypersensitivity. <em>American Journal of Otolaryngology</em>, 44(3), 103815.</p></li>
+<li><p>Goebel, R., Schmaltz, A., Brackett, B. A., Wood, S. A., &amp; Noguchi, K. (2023). Modeling and forecasting percent changes in national park visitation using social media. <em>Journal of Forecasting</em>, 42(6), 1502–1518.</p></li>
+</ul>
+<p><strong>Under Review</strong></p>
+<ul>
+<li>Goebel, R. (2025). Bayesian downscaling of satellite-derived solar-induced chlorophyll fluorescence. <em>Under review at Journal of the Royal Statistical Society: Series C</em>.</li>
+</ul>
+<p><strong>Conference Presentations</strong></p>
+<ul>
+<li>Goebel, R. (December 2024). <em>Bayesian Downscaling of Satellite-Derived Solar-Induced Chlorophyll Fluorescence.</em> Poster presented at the American Geophysical Union Annual Meeting, Washington D.C.</li>
+</ul>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p><strong>CRAN Packages</strong></p>
+<ul>
+<li><strong>VisitorCounts</strong> — Modeling and forecasting of park visitor counts using social media data and on-site counts. Decomposes trend and seasonal components via Singular Spectrum Analysis to produce short-term forecasts and percent-change estimates. <a href="https://cran.r-project.org/package=VisitorCounts">CRAN</a></li>
+</ul>
+<p><strong>Research Packages</strong></p>
+<ul>
+<li><p><strong>fastblm</strong> — Fast Bayesian linear model fitting for large spatial datasets, using conjugate gradient, Woodbury, or sparse Cholesky methods with optional Lanczos standard errors and support for linear constraints. <a href="https://github.com/RussJGoebel/fastblm">GitHub</a></p></li>
+<li><p><strong>spatintegrate</strong> — Integrates functions over spatial geometries (e.g.&nbsp;from the <code>sf</code> package). Useful for constructing spatial design matrices with different bases and for area-to-area kriging. <a href="https://github.com/RussJGoebel/spatintegrate">GitHub</a></p></li>
+</ul>
+</section>
+<section id="research-experience" class="level2">
+<h2 class="anchored" data-anchor-id="research-experience">Research Experience</h2>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>Doctoral Research in Applied Statistics</strong> <em>Boston University</em></p>
+<ul>
+<li>Developed a Bayesian modeling framework for spatial change-of-support and downscaling of remote-sensing data, with emphasis on scalable inference across multiple spatial resolutions.</li>
+<li>Designed and implemented two R packages supporting reproducible and computationally efficient workflows for applied scientists working with large geospatial datasets.</li>
+</ul>
+</div>
+<div class="cv-right">
+<p>2019–2026</p>
+</div>
+</div>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>Clinical and Applied Research Collaborations</strong> <em>Boston University</em></p>
+<ul>
+<li>Longitudinal mixed-effects modeling of weekly depression and anxiety outcomes for a six-session psychoeducational intervention among autistic adults; led analysis resulting in publication in the <em>American Journal of Occupational Therapy</em>.</li>
+<li>Fixed-effects meta-analysis using inverse-variance weighting to pool cough frequency, severity, and quality-of-life outcomes across randomized controlled trials of neuromodulators for chronic airway hypersensitivity; resulted in publication in the <em>American Journal of Otolaryngology</em>.</li>
+<li>Multiple logistic, linear, and ordinal regression with multiple imputation by chained equations (MICE) to assess associations between pre-COVID functional dependence, symptom burden, and post-COVID functional decline in skilled nursing facility residents; resulted in publication in <em>JAMDA</em>.</li>
+</ul>
+</div>
+<div class="cv-right">
+<p>2021–2023</p>
+</div>
+</div>
+</section>
+<section id="consulting-experience" class="level2">
+<h2 class="anchored" data-anchor-id="consulting-experience">Consulting Experience</h2>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>Lead Statistical Consultant</strong> <em>Boston University Statistical Consulting</em></p>
+<ul>
+<li>Oversaw graduate consulting teams across more than 50 interdisciplinary projects spanning a wide range of university domains, including clinical research, epidemiology, life sciences, forensic science, anthropology, and marketing.</li>
+<li>Advised collaborators on study design, power analysis, statistical analysis planning, and interpretation of results for non-statistical audiences.</li>
+<li>Methods deployed across engagements included regression and GLMs, mixed-effects models, survival analysis, meta-analysis, multiple imputation, sensitivity analyses, and exploratory data analysis.</li>
+<li>Prepared technical reports and presented findings to collaborators across disciplines.</li>
+</ul>
+</div>
+<div class="cv-right">
+<p>2021–2023</p>
+</div>
+</div>
+</section>
+<section id="teaching-experience" class="level2">
+<h2 class="anchored" data-anchor-id="teaching-experience">Teaching Experience</h2>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>Instructor of Record &amp; Teaching Assistant</strong> <em>Boston University</em></p>
+<ul>
+<li>Instructor of record for undergraduate calculus.</li>
+<li>Teaching assistant for undergraduate and graduate courses in statistics and mathematics, including linear algebra and data science.</li>
+<li>Delivered invited seminar on reproducible statistical research using R Markdown.</li>
+</ul>
+</div>
+<div class="cv-right">
+<p>2019–2025</p>
+</div>
+</div>
+</section>
+<section id="leadership-professional-service" class="level2">
+<h2 class="anchored" data-anchor-id="leadership-professional-service">Leadership &amp; Professional Service</h2>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>President, BU Chapter of the ASA (BUSCASA)</strong> <em>Boston University</em></p>
+<ul>
+<li>Led executive board and organized programming connecting students with academic and industry statisticians.</li>
+<li>Coordinated seminars and professional development events focused on applied and reproducible statistical practice.</li>
+</ul>
+</div>
+<div class="cv-right">
+<p>2022–2024</p>
+</div>
+</div>
+</section>
+<section id="awards-honors" class="level2">
+<h2 class="anchored" data-anchor-id="awards-honors">Awards &amp; Honors</h2>
+<div class="cv-entry">
+<div class="cv-left">
+<p><strong>Outstanding Teaching Fellow Award</strong> <em>Department of Mathematics and Statistics, Boston University</em></p>
+</div>
+<div class="cv-right">
+<p>2021</p>
+</div>
+</div>
+</section>
+<section id="technical-expertise" class="level2">
+<h2 class="anchored" data-anchor-id="technical-expertise">Technical Expertise</h2>
+<p><strong>Statistical Methods:</strong> Bayesian modeling; longitudinal and mixed-effects models; regression and GLMs; survival analysis; meta-analysis; multiple imputation; sensitivity analysis; experimental design; spatial modeling.</p>
+<p><strong>Programming:</strong> R, Python, MATLAB; reproducible workflows (R Markdown); version control (Git).</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="statistics,bayesian" data-listing-date-sort="1779163200000" data-listing-file-modified-sort="1780516959020" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="65" data-listing-word-count-sort="12942">
-<div class="thumbnail">
-<p><a href="./posts/kriging-competition/index.html" class="no-external"></a></p><a href="./posts/kriging-competition/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\kriging-competition\index_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/kriging-competition/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kriging-competition/index.html" class="no-external">A kriging competition</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kriging-competition/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/kriging-competition/index.html" class="no-external">A survey of scalable Gaussian process methods, organized around the Heaton et al.&nbsp;(2019) comparison paper.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kriging-competition/index.html" class="no-external">
-<div class="listing-date">
-May 19, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="spatial statistics,downscaling,bayesian,kriging" data-listing-date-sort="1778990400000" data-listing-file-modified-sort="1780514220863" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2670">
-<div class="thumbnail">
-<p><a href="./posts/kriging-lindgren-SAR/index.html" class="no-external"></a></p><a href="./posts/kriging-lindgren-SAR/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\kriging-lindgren-SAR\index_files\figure-html\plot-coverage-rate-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/kriging-lindgren-SAR/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kriging-lindgren-SAR/index.html" class="no-external">Area-to-area kriging with basis functions</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kriging-lindgren-SAR/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/kriging-lindgren-SAR/index.html" class="no-external">Satellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kriging-lindgren-SAR/index.html" class="no-external">
-<div class="listing-date">
-May 17, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="spatial statistics,bayesian,gaussian processes,kriging" data-listing-date-sort="1778040000000" data-listing-file-modified-sort="1780519374994" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="59" data-listing-word-count-sort="11677">
-<div class="thumbnail">
-<p><a href="./posts/kriging-gp-equivalence/index.html" class="no-external"></a></p><a href="./posts/kriging-gp-equivalence/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\kriging-gp-equivalence\index_files\figure-html\cs-plot-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/kriging-gp-equivalence/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kriging-gp-equivalence/index.html" class="no-external">Kriging is Bayesian Linear Regression</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kriging-gp-equivalence/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/kriging-gp-equivalence/index.html" class="no-external">A unified view of kriging, GP regression, and spatial basis function methods</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kriging-gp-equivalence/index.html" class="no-external">
-<div class="listing-date">
-May 6, 2026
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

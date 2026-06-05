@@ -8,11 +8,11 @@ listing:
     max-items: 3
 ---
 
-I'm a statistician with a background in consulting and a specialty in spatial modeling. 
-I care about epistemology, rigor, and the gap between how statistics is 
-taught and how it's actually practiced.
-This site is where I think out loud — about statistical methods, data 
-analysis, and occasionally other things.
+I'm a statistician with a PhD from Boston University. I work on Bayesian 
+spatial modeling and have spent several years doing applied consulting 
+across health, life sciences, and other domains.
+
+This site is where I write about statistics and whatever else I'm thinking about.
 
 ## Recent Writing
 ::: {#recent-posts}

@@ -2,27 +2,31 @@
 title: "About"
 ---
 
-![](images/portrait_of_my_face.jpg){width=200 style="border-radius: 50%; float: left; margin-right: 20px;"}
+::: {.about-grid}
+::: {.about-image}
+![](images/portrait_of_my_face.jpg){width=200 style="border-radius: 50%;"}
+:::
+::: {.about-text}
+I'm a statistician based in Boston with a PhD in Statistics from Boston University. My research focuses on Bayesian spatial modeling: I develop methods to work with satellite-derived data at different spatial resolutions.
+:::
+:::
 
-I'm a statistician based in Boston with a PhD in Statistics from Boston 
-University and a background in statistical consulting. My graduate research focused on spatial modeling for satellite data. 
+Alongside that, I spent several years leading applied consulting teams across more than 50 projects in health, life sciences, and other domains. This work resulted in co-authorship on three peer-reviewed publications and a practical education in how statistical methods meet messy real-world data.
 
-
-I think a lot about epistemology — not in an abstract philosophical way, 
-but in a practical sense: how do we know what we know, and how often 
-are we fooling ourselves?
-
-This site is where I write about statistics and whatever else I'm thinking 
-about.
+I think a lot about epistemology — not abstractly, but practically: how do we know what we know, and how often are we fooling ourselves? This site is where I work through some of those questions.
 
 ## Background
 
 - PhD in Statistics, Boston University
-- Experience in statistical consulting across applied domains
-- Methods: Bayesian inference, regression modeling, experimental design, 
-  and mixed models
+- Research: Bayesian spatial modeling, change-of-support methods, 
+  scalable inference for large datasets
+- Applied methods: mixed-effects models, regression and GLMs, 
+  meta-analysis, multiple imputation, survival analysis
+- 50+ consulting projects across health, life sciences, forensic 
+  science, anthropology, and more
+- [Full CV](cv.qmd)
 
 ## Contact
 
-You can reach me at russjgoebel@gmail.com or find me on 
+You can reach me at russjgoebel@gmail.com or find me on
 [LinkedIn](https://www.linkedin.com/in/russellgoebel/) and [GitHub](https://github.com/RussJGoebel).

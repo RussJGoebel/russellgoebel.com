@@ -3,6 +3,9 @@
     "index.qmd": [
       "posts"
     ],
+    "portfolio.qmd": [
+      "portfolio"
+    ],
     "posts.qmd": [
       "posts"
     ]

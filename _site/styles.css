@@ -23,3 +23,59 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.disclaimer {
+  font-style: italic;
+  color: #555;
+  border-left: 3px solid #ccc;
+  padding-left: 1em;
+  margin-bottom: 1.5em;
+}
+
+.cv-contact {
+  color: #555;
+  margin-bottom: 1.5em;
+}
+
+.cv-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2em;
+}
+
+.cv-left {
+  flex: 1;
+  padding-right: 2em;
+}
+
+.cv-right {
+  flex-shrink: 0;
+  color: #555;
+  font-size: 0.95em;
+  text-align: right;
+  min-width: 90px;
+}
+
+.cv-download {
+  margin-bottom: 2em;
+}
+
+.clear {
+  clear: both;
+}
+
+.about-grid {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 0.5em;
+}
+
+.about-image {
+  flex-shrink: 0;
+}
+
+.about-text {
+  flex: 1;
+}

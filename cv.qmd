@@ -1,0 +1,190 @@
+---
+title: "Russell Goebel"
+format:
+  html:
+    toc: false
+---
+
+::: {.cv-contact}
+russjgoebel@gmail.com · 360-393-1557 · [linkedin.com/in/russellgoebel](https://linkedin.com/in/russellgoebel/)
+:::
+
+::: {.cv-download}
+[Download PDF](Russell_Goebel_CV.pdf){.btn .btn-outline-primary}
+:::
+
+## Education
+
+::: {.cv-entry}
+::: {.cv-left}
+**PhD in Statistics**
+*Boston University*
+
+Dissertation: *Bayesian Change-of-Support Modeling for Remote-Sensing Data: Scalable Inference Across Spatial Resolutions*
+
+Advisor: Luis Carvalho
+:::
+::: {.cv-right}
+2019–2026
+:::
+:::
+
+::: {.cv-entry}
+::: {.cv-left}
+**BA in Statistics**
+*Western Washington University*
+
+Minor: English
+:::
+::: {.cv-right}
+2015–2019
+:::
+:::
+
+## Research Interests
+
+Bayesian spatial modeling; change-of-support methods; scalable inference for large spatial datasets; spectral and low-rank approximations to spatial processes; longitudinal and mixed-effects modeling in health research.
+
+## Publications
+
+**Peer-Reviewed Articles**
+
+- Canter, B. E., Goebel, R., Kulkarni, V., Mak, W., Falvey, J., & Boockvar, K. (2024). Associations between eating, mobility, and toileting functional dependence and COVID-19 symptoms. *Journal of the American Medical Directors Association*, 25(2), 342–347.
+
+- Holmes, L. G., Goebel, R. J., Hollingue, C., Zhu, S., Zhang, H., Shan, W., … & Rothman, E. F. (2023). Reductions in depression and anxiety among autistic adults participating in an intervention to promote healthy relationships. *The American Journal of Occupational Therapy*, 77(2), 7702185070.
+
+- Amador, R., Goebel, R., Noordzij, J. P., Bhatt, N. K., Cohen, S., Daniels, K., … & Krisciunas, G. P. (2023). A systematic review and meta-analysis of neuromodulators to treat chronic airway hypersensitivity. *American Journal of Otolaryngology*, 44(3), 103815.
+
+- Goebel, R., Schmaltz, A., Brackett, B. A., Wood, S. A., & Noguchi, K. (2023). Modeling and forecasting percent changes in national park visitation using social media. *Journal of Forecasting*, 42(6), 1502–1518.
+
+**Under Review**
+
+- Goebel, R. (2025). Bayesian downscaling of satellite-derived solar-induced chlorophyll fluorescence. *Under review at Journal of the Royal Statistical Society: Series C*.
+
+**Conference Presentations**
+
+- Goebel, R. (December 2024). *Bayesian Downscaling of Satellite-Derived 
+  Solar-Induced Chlorophyll Fluorescence.* Poster presented at the American 
+  Geophysical Union Annual Meeting, Washington D.C.
+
+## Software
+
+**CRAN Packages**
+
+- **VisitorCounts** — Modeling and forecasting of park visitor counts using social 
+  media data and on-site counts. Decomposes trend and seasonal components via 
+  Singular Spectrum Analysis to produce short-term forecasts and percent-change 
+  estimates. [CRAN](https://cran.r-project.org/package=VisitorCounts)
+
+**Research Packages**
+
+- **fastblm** — Fast Bayesian linear model fitting for large spatial datasets, 
+  using conjugate gradient, Woodbury, or sparse Cholesky methods with optional 
+  Lanczos standard errors and support for linear constraints. 
+  [GitHub](https://github.com/RussJGoebel/fastblm)
+
+- **spatintegrate** — Integrates functions over spatial geometries (e.g. from the 
+  `sf` package). Useful for constructing spatial design matrices with different 
+  bases and for area-to-area kriging. 
+  [GitHub](https://github.com/RussJGoebel/spatintegrate)
+  
+## Research Experience
+
+::: {.cv-entry}
+::: {.cv-left}
+**Doctoral Research in Applied Statistics**
+*Boston University*
+
+- Developed a Bayesian modeling framework for spatial change-of-support and downscaling of remote-sensing data, with emphasis on scalable inference across multiple spatial resolutions. 
+- Designed and implemented two R packages supporting reproducible and computationally efficient workflows for applied scientists working with large geospatial datasets.
+:::
+::: {.cv-right}
+2019–2026
+:::
+:::
+
+::: {.cv-entry}
+::: {.cv-left}
+**Clinical and Applied Research Collaborations**
+*Boston University*
+
+- Longitudinal mixed-effects modeling of weekly depression and anxiety outcomes for a six-session psychoeducational intervention among autistic adults; led analysis resulting in publication in the *American Journal of Occupational Therapy*.
+- Fixed-effects meta-analysis using inverse-variance weighting to pool cough frequency, severity, and quality-of-life outcomes across randomized controlled trials of neuromodulators for chronic airway hypersensitivity; resulted in publication in the *American Journal of Otolaryngology*.
+- Multiple logistic, linear, and ordinal regression with multiple imputation by chained equations (MICE) to assess associations between pre-COVID functional dependence, symptom burden, and post-COVID functional decline in skilled nursing facility residents; resulted in publication in *JAMDA*.
+:::
+::: {.cv-right}
+2021–2023
+:::
+:::
+
+## Consulting Experience
+
+::: {.cv-entry}
+::: {.cv-left}
+**Lead Statistical Consultant**
+*Boston University Statistical Consulting*
+
+- Oversaw graduate consulting teams across more than 50 interdisciplinary projects 
+  spanning a wide range of university domains, including clinical research, 
+  epidemiology, life sciences, forensic science, anthropology, and marketing.
+- Advised collaborators on study design, power analysis, statistical analysis 
+  planning, and interpretation of results for non-statistical audiences.
+- Methods deployed across engagements included regression and GLMs, mixed-effects 
+  models, survival analysis, meta-analysis, multiple imputation, sensitivity 
+  analyses, and exploratory data analysis.
+- Prepared technical reports and presented findings to collaborators across 
+  disciplines.
+:::
+::: {.cv-right}
+2021–2023
+:::
+:::
+
+## Teaching Experience
+
+::: {.cv-entry}
+::: {.cv-left}
+**Instructor of Record & Teaching Assistant**
+*Boston University*
+
+- Instructor of record for undergraduate calculus.
+- Teaching assistant for undergraduate and graduate courses in statistics and mathematics, including linear algebra and data science.
+- Delivered invited seminar on reproducible statistical research using R Markdown.
+:::
+::: {.cv-right}
+2019–2025
+:::
+:::
+
+## Leadership & Professional Service
+
+::: {.cv-entry}
+::: {.cv-left}
+**President, BU Chapter of the ASA (BUSCASA)**
+*Boston University*
+
+- Led executive board and organized programming connecting students with academic and industry statisticians.
+- Coordinated seminars and professional development events focused on applied and reproducible statistical practice.
+:::
+::: {.cv-right}
+2022–2024
+:::
+:::
+
+## Awards & Honors
+
+::: {.cv-entry}
+::: {.cv-left}
+**Outstanding Teaching Fellow Award**
+*Department of Mathematics and Statistics, Boston University*
+:::
+::: {.cv-right}
+2021
+:::
+:::
+
+## Technical Expertise
+
+**Statistical Methods:** Bayesian modeling; longitudinal and mixed-effects models; regression and GLMs; survival analysis; meta-analysis; multiple imputation; sensitivity analysis; experimental design; spatial modeling.
+
+**Programming:** R, Python, MATLAB; reproducible workflows (R Markdown); version control (Git).
