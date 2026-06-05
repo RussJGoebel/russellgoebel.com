@@ -83,7 +83,7 @@ It is noteworthy that many other basis function types are easy to integrate. For
 
 ## Why we'll start with it: SPDE won the satellite dataset
 
-In the @heaton2019case competition--see [*my writeup*](../posts/kriging-competition/index.Rmd) for a summary--the SPDE/INLA method achieved the best RMSE on
+In @heaton2019case, cutting edge spatial prediction methods faced-off on real and simulated data--see [*my writeup*](../kriging-competition/index.Rmd) for a summary. The SPDE/INLA method achieved the best RMSE on
 the real satellite surface temperature data (1.53 RMSE) and was a top-performer on their simulation both in terms of speed and accuracy. Not only this, but their results hold for regular lattices, whose integrals are trivial to compute using area calculations available in common spatial packages like `sf`.
 
 While it's a clear first-attempt to port to the areal setting, several methods are likely low-hanging-fruit as well. For example, another top performer for point-referenced data, LatticeKrig, uses a similarly motivated basis structure (with an intended spatially autoregressive prior) and would likely be easy to import to an areal setting. LatticeKrig uses basis functions are radial polynomials--which adds a step for integration beyond areal averages, but would not be challenging to integrate over triangulations.

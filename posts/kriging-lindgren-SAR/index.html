@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2026-05-17">
 <meta name="description" content="Satellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly.">
 
-<title>Area-to-area kriging with basis functions – Russell Goebel</title>
+<title>Area-to-area kriging with basis functions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -45,49 +45,16 @@ div.csl-indent {
 }</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -119,85 +86,12 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="fullcontent">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Russell Goebel</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../posts.html"> 
-<span class="menu-text">Writing</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-slides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Slides</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-slides">    
-        <li>
-    <a class="dropdown-item" href="../../slides/fastblm_and_spatintegrate.html">
- <span class="dropdown-text">fastblm and spatintegrate</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../../portfolio.html"> 
-<span class="menu-text">Portfolio</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../cv.html"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-naive-approach-is-expensive" id="toc-the-naive-approach-is-expensive" class="nav-link active" data-scroll-target="#the-naive-approach-is-expensive">The naive approach is expensive</a></li>
-  <li><a href="#basis-functions-reduce-on2-to-on" id="toc-basis-functions-reduce-on2-to-on" class="nav-link" data-scroll-target="#basis-functions-reduce-on2-to-on">Basis functions reduce <span class="math inline">\(O(n^2)\)</span> to <span class="math inline">\(O(n)\)</span></a></li>
-  <li><a href="#what-makes-a-good-basis" id="toc-what-makes-a-good-basis" class="nav-link" data-scroll-target="#what-makes-a-good-basis">What makes a good basis?</a></li>
-  <li><a href="#why-well-start-with-it-spde-won-the-satellite-dataset" id="toc-why-well-start-with-it-spde-won-the-satellite-dataset" class="nav-link" data-scroll-target="#why-well-start-with-it-spde-won-the-satellite-dataset">Why we’ll start with it: SPDE won the satellite dataset</a></li>
-  <li><a href="#the-connection-to-sar-models-on-regular-grids" id="toc-the-connection-to-sar-models-on-regular-grids" class="nav-link" data-scroll-target="#the-connection-to-sar-models-on-regular-grids">The connection to SAR models on regular grids</a></li>
-  <li><a href="#simulation-does-the-area-correction-matter" id="toc-simulation-does-the-area-correction-matter" class="nav-link" data-scroll-target="#simulation-does-the-area-correction-matter">Simulation: does the area correction matter?</a></li>
-  <li><a href="#swapping-to-a-fourier-basis-free-given-the-sar-fit" id="toc-swapping-to-a-fourier-basis-free-given-the-sar-fit" class="nav-link" data-scroll-target="#swapping-to-a-fourier-basis-free-given-the-sar-fit">Swapping to a Fourier basis: free given the SAR fit</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  </ul>
-</nav>
-    </div>
-<!-- main -->
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -236,7 +130,7 @@ window.Quarto = {
 </header>
 
 
-<p>In a <a href="../../posts/kriging-gp-equivalence/index.html">previous post</a>, I examine how kriging and Gaussian process regression can be formulated as Bayesian linear regression. The posterior mean is the kriging predictor. This post is about what happens when observations are <em>areas</em> rather than points — the area-to-area (ATA) kriging problem — and why the choice of basis functions is not incidental but central to making the problem tractable.</p>
+<p>In a <a href="../kriging-gp-equivalence/index.qmd">previous post</a>, I examine how kriging and Gaussian process regression can be formulated as Bayesian linear regression. The posterior mean is the kriging predictor. This post is about what happens when observations are <em>areas</em> rather than points — the area-to-area (ATA) kriging problem — and why the choice of basis functions is not incidental but central to making the problem tractable.</p>
 <section id="the-naive-approach-is-expensive" class="level2">
 <h2 class="anchored" data-anchor-id="the-naive-approach-is-expensive">The naive approach is expensive</h2>
 <p>Classical point-referenced kriging predicts <span class="math inline">\(v(s_0)\)</span> from observations <span class="math inline">\(y_1, \ldots, y_n\)</span> using the covariance structure of the field. When each observation <span class="math inline">\(y_i\)</span> is actually an areal average over a footprint <span class="math inline">\(D_i\)</span>,</p>
@@ -265,7 +159,7 @@ window.Quarto = {
 </section>
 <section id="why-well-start-with-it-spde-won-the-satellite-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="why-well-start-with-it-spde-won-the-satellite-dataset">Why we’ll start with it: SPDE won the satellite dataset</h2>
-<p>In <span class="citation" data-cites="heaton2019case">Heaton et al. (<a href="#ref-heaton2019case" role="doc-biblioref">2019</a>)</span>, cutting edge spatial prediction methods faced-off on real and simulated data–see <a href="../../posts/kriging-competition/index.html"><em>my writeup</em></a> for a summary. The SPDE/INLA method achieved the best RMSE on the real satellite surface temperature data (1.53 RMSE) and was a top-performer on their simulation both in terms of speed and accuracy. Not only this, but their results hold for regular lattices, whose integrals are trivial to compute using area calculations available in common spatial packages like <code>sf</code>.</p>
+<p>In <span class="citation" data-cites="heaton2019case">Heaton et al. (<a href="#ref-heaton2019case" role="doc-biblioref">2019</a>)</span>, cutting edge spatial prediction methods faced-off on real and simulated data–see <a href="../kriging-competition/index.Rmd"><em>my writeup</em></a> for a summary. The SPDE/INLA method achieved the best RMSE on the real satellite surface temperature data (1.53 RMSE) and was a top-performer on their simulation both in terms of speed and accuracy. Not only this, but their results hold for regular lattices, whose integrals are trivial to compute using area calculations available in common spatial packages like <code>sf</code>.</p>
 <p>While it’s a clear first-attempt to port to the areal setting, several methods are likely low-hanging-fruit as well. For example, another top performer for point-referenced data, LatticeKrig, uses a similarly motivated basis structure (with an intended spatially autoregressive prior) and would likely be easy to import to an areal setting. LatticeKrig uses basis functions are radial polynomials–which adds a step for integration beyond areal averages, but would not be challenging to integrate over triangulations.</p>
 </section>
 <section id="the-connection-to-sar-models-on-regular-grids" class="level2">
@@ -392,8 +286,6 @@ window.Quarto = {
 </tbody>
 </table>
 
-
-
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -403,7 +295,8 @@ Heaton, Matthew J et al. 2019. <span>“A Case Study Competition Among Methods f
 <div id="ref-lindgren2011explicit" class="csl-entry" role="listitem">
 Lindgren, Finn, Håvard Rue, and Johan Lindström. 2011. <span>“An Explicit Link Between <span>G</span>aussian Fields and <span>G</span>aussian <span>M</span>arkov Random Fields: The Stochastic Partial Differential Equation Approach.”</span> <em>Journal of the Royal Statistical Society: Series B</em> 73 (4): 423–98.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section></div></main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -825,19 +718,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>© Russell Goebel 2026</p>
-</div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
-    <div class="nav-footer-right">
-<p>Built with <a href="https://quarto.org">Quarto</a></p>
-</div>
-  </div>
-</footer>
 
 
 
