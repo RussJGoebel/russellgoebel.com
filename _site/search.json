@@ -677,5 +677,12 @@
     "title": "Writing",
     "section": "",
     "text": "A kriging competition\n\n\n\n\n\nA survey of scalable Gaussian process methods, organized around the Heaton et al. (2019) comparison paper.\n\n\n\n\n\nMay 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nArea-to-area kriging with basis functions\n\n\n\n\n\nSatellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly.\n\n\n\n\n\nMay 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nKriging is Bayesian Linear Regression\n\n\n\n\n\nA unified view of kriging, GP regression, and spatial basis function methods\n\n\n\n\n\nMay 6, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "cv.html#software-developed",
+    "href": "cv.html#software-developed",
+    "title": "Russell Goebel",
+    "section": "Software Developed",
+    "text": "Software Developed\nCRAN Packages\n\nVisitorCounts — Modeling and forecasting of park visitor counts using social media data and on-site counts. Decomposes trend and seasonal components via Singular Spectrum Analysis to produce short-term forecasts and percent-change estimates. CRAN\n\nResearch Packages\n\nfastblm — Fast Bayesian linear model fitting for large spatial datasets, using conjugate gradient, Woodbury, or sparse Cholesky methods with optional Lanczos standard errors and support for linear constraints. GitHub\nspatintegrate — Integrates functions over spatial geometries (e.g. from the sf package). Useful for constructing spatial design matrices with different bases and for area-to-area kriging. GitHub"
   }
 ]

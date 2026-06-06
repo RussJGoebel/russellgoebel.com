@@ -67,7 +67,7 @@ Bayesian spatial modeling; change-of-support methods; scalable inference for lar
   Solar-Induced Chlorophyll Fluorescence.* Poster presented at the American 
   Geophysical Union Annual Meeting, Washington D.C.
 
-## Software
+## Software Developed
 
 **CRAN Packages**
 
