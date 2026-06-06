@@ -111,3 +111,9 @@ a:hover {
   font-size: 0.9em;
   color: #555;
 }
+
+@media (max-width: 768px) {
+  .home-card {
+    grid-column: span 12;
+  }
+}
