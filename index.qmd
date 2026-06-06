@@ -10,9 +10,8 @@ This site is where I write about statistics and whatever else I'm thinking about
 
 :::: {.grid}
 
-::: {.g-col-4 .home-card}
+::: {.g-col-12 .g-col-md-4 .home-card}
 ### Recent Writing
-
 - [A kriging competition](posts/kriging-competition/)
 - [Area-to-area kriging with basis functions](posts/kriging-lindgren-sar/)
 - [Kriging is Bayesian Linear Regression](posts/kriging-gp-equivalence/)
@@ -20,9 +19,8 @@ This site is where I write about statistics and whatever else I'm thinking about
 [All writing →](posts.qmd)
 :::
 
-::: {.g-col-4 .home-card}
+::: {.g-col-12 .g-col-md-4 .home-card}
 ### Publications
-
 - [Depression & anxiety in autistic adults](https://doi.org/10.5014/ajot.2023.050108)
 - [Functional dependence & COVID-19](https://doi.org/10.1016/j.jamda.2023.11.012)
 - [Neuromodulators for chronic cough](https://doi.org/10.1016/j.amjoto.2023.103815)
@@ -31,14 +29,11 @@ This site is where I write about statistics and whatever else I'm thinking about
 [Full CV →](cv.qmd)
 :::
 
-::: {.g-col-4 .home-card}
+::: {.g-col-12 .g-col-md-4 .home-card}
 ### Software
-
 - [VisitorCounts](https://cran.r-project.org/package=VisitorCounts) — CRAN
 - [fastblm](https://github.com/RussJGoebel/fastblm) — GitHub
 - [spatintegrate](https://github.com/RussJGoebel/spatintegrate) — GitHub
-
-
 :::
 
 ::::
