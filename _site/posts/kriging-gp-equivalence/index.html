@@ -1197,14 +1197,14 @@ Another literature not covered in this history
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"INLA:          %.1f ms</span><span class="sc">\n</span><span class="st">"</span>, t_inla))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>INLA:          1646.0 ms</code></pre>
+<pre><code>INLA:          1755.3 ms</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"Speedup:       %.0fx</span><span class="sc">\n</span><span class="st">"</span>,   speedup))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Speedup:       5451x</code></pre>
+<pre><code>Speedup:       5365x</code></pre>
 </div>
 </div>
-<p>The explicit sparse solve is 5451x faster (0.3 ms vs 1646.0 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known.</p>
+<p>The explicit sparse solve is 5365x faster (0.3 ms vs 1755.3 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known.</p>
 </section>
 <section id="results" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="results"><span class="header-section-number">4.5</span> Results</h2>
@@ -1777,6 +1777,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="russjgoebel/russellgoebel.com" data-repo-id="R_kgDORt2rzA" data-category="Announcements" data-category-id="DIC_kwDORt2rzM4C_GPS" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="preferred_color_scheme">
+<input type="hidden" id="giscus-alt-theme" value="preferred_color_scheme">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -35,3 +35,16 @@ format:
 execute:
   echo: false
   
+comments:
+  giscus:
+    repo: russjgoebel/russellgoebel.com
+    repo-id: R_kgDORt2rzA
+    category: Announcements
+    category-id: DIC_kwDORt2rzM4C_GPS
+    mapping: pathname
+    reactions-enabled: true
+    input-position: bottom
+    theme: preferred_color_scheme
+    language: en
+    loading: lazy
+  

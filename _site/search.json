@@ -427,11 +427,11 @@
     "text": "Publications\nPeer-Reviewed Articles\n\nCanter, B. E., Goebel, R., Kulkarni, V., Mak, W., Falvey, J., & Boockvar, K. (2024). Associations between eating, mobility, and toileting functional dependence and COVID-19 symptoms. Journal of the American Medical Directors Association, 25(2), 342–347.\nHolmes, L. G., Goebel, R. J., Hollingue, C., Zhu, S., Zhang, H., Shan, W., … & Rothman, E. F. (2023). Reductions in depression and anxiety among autistic adults participating in an intervention to promote healthy relationships. The American Journal of Occupational Therapy, 77(2), 7702185070.\nAmador, R., Goebel, R., Noordzij, J. P., Bhatt, N. K., Cohen, S., Daniels, K., … & Krisciunas, G. P. (2023). A systematic review and meta-analysis of neuromodulators to treat chronic airway hypersensitivity. American Journal of Otolaryngology, 44(3), 103815.\nGoebel, R., Schmaltz, A., Brackett, B. A., Wood, S. A., & Noguchi, K. (2023). Modeling and forecasting percent changes in national park visitation using social media. Journal of Forecasting, 42(6), 1502–1518.\n\nUnder Review\n\nGoebel, R. (2025). Bayesian downscaling of satellite-derived solar-induced chlorophyll fluorescence. Under review at Journal of the Royal Statistical Society: Series C.\n\nConference Presentations\n\nGoebel, R. (December 2024). Bayesian Downscaling of Satellite-Derived Solar-Induced Chlorophyll Fluorescence. Poster presented at the American Geophysical Union Annual Meeting, Washington D.C."
   },
   {
-    "objectID": "cv.html#software",
-    "href": "cv.html#software",
+    "objectID": "cv.html#software-developed",
+    "href": "cv.html#software-developed",
     "title": "Russell Goebel",
-    "section": "Software",
-    "text": "Software\nCRAN Packages\n\nVisitorCounts — Modeling and forecasting of park visitor counts using social media data and on-site counts. Decomposes trend and seasonal components via Singular Spectrum Analysis to produce short-term forecasts and percent-change estimates. CRAN\n\nResearch Packages\n\nfastblm — Fast Bayesian linear model fitting for large spatial datasets, using conjugate gradient, Woodbury, or sparse Cholesky methods with optional Lanczos standard errors and support for linear constraints. GitHub\nspatintegrate — Integrates functions over spatial geometries (e.g. from the sf package). Useful for constructing spatial design matrices with different bases and for area-to-area kriging. GitHub"
+    "section": "Software Developed",
+    "text": "Software Developed\nCRAN Packages\n\nVisitorCounts — Modeling and forecasting of park visitor counts using social media data and on-site counts. Decomposes trend and seasonal components via Singular Spectrum Analysis to produce short-term forecasts and percent-change estimates. CRAN\n\nResearch Packages\n\nfastblm — Fast Bayesian linear model fitting for large spatial datasets, using conjugate gradient, Woodbury, or sparse Cholesky methods with optional Lanczos standard errors and support for linear constraints. GitHub\nspatintegrate — Integrates functions over spatial geometries (e.g. from the sf package). Useful for constructing spatial design matrices with different bases and for area-to-area kriging. GitHub"
   },
   {
     "objectID": "cv.html#research-experience",
@@ -502,20 +502,6 @@
     "title": "Russell Goebel",
     "section": "",
     "text": "I’m a statistician with a PhD from Boston University. I work on Bayesian spatial modeling and have spent several years doing applied consulting across health, life sciences, and other domains.\nThis site is where I write about statistics and whatever else I’m thinking about.\n\n\n\nRecent Writing\n\nA kriging competition\nArea-to-area kriging with basis functions\nKriging is Bayesian Linear Regression\n\nAll writing →\n\n\nPublications\n\nDepression & anxiety in autistic adults\nFunctional dependence & COVID-19\nNeuromodulators for chronic cough\nNational park visitation\n\nFull CV →\n\n\nSoftware\n\nVisitorCounts — CRAN\nfastblm — GitHub\nspatintegrate — GitHub"
-  },
-  {
-    "objectID": "index.html#recent-writing",
-    "href": "index.html#recent-writing",
-    "title": "Russell Goebel",
-    "section": "Recent Writing",
-    "text": "Recent Writing\n\n\n\n\n\n\n\n\n\n\nA kriging competition\n\n\n\n\n\nA survey of scalable Gaussian process methods, organized around the Heaton et al. (2019) comparison paper.\n\n\n\n\n\nMay 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nArea-to-area kriging with basis functions\n\n\n\n\n\nSatellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly.\n\n\n\n\n\nMay 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nKriging is Bayesian Linear Regression\n\n\n\n\n\nA unified view of kriging, GP regression, and spatial basis function methods\n\n\n\n\n\nMay 6, 2026\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html#featured",
-    "href": "index.html#featured",
-    "title": "Russell Goebel",
-    "section": "Featured",
-    "text": "Featured\nArea-to-Area Spatial Prediction\nA walkthrough of fastblm and spatintegrate for satellite SIF downscaling — raster SAR models, Fourier-Matérn priors, and area-to-area kriging."
   },
   {
     "objectID": "portfolio/chronic_cough/index.html",
@@ -662,7 +648,7 @@
     "href": "posts/kriging-gp-equivalence/index.html#timing",
     "title": "Kriging is Bayesian Linear Regression",
     "section": "4.4 Timing",
-    "text": "4.4 Timing\n\ntime_explicit &lt;- microbenchmark(\n  as.vector(A_pred %*% Matrix::solve(K_spde, AtRinvy)),\n  times = 50\n)\n\ntime_inla &lt;- microbenchmark(\n  inla(y ~ -1 + f(spatial_idx, model = spde),\n       data              = inla.stack.data(stk),\n       family            = \"gaussian\",\n       control.predictor = list(A = inla.stack.A(stk), compute = TRUE),\n       control.family    = list(\n         hyper = list(prec = list(initial = log(1/sigma2_e), fixed = TRUE))\n       ),\n       control.inla    = list(int.strategy = \"eb\"),\n       control.compute = list(config = TRUE)),\n  times = 10\n)\n\nt_explicit &lt;- median(time_explicit$time) / 1e6\nt_inla     &lt;- median(time_inla$time)     / 1e6\nspeedup    &lt;- t_inla / t_explicit\n\ncat(sprintf(\"Sparse solve:  %.1f ms\\n\", t_explicit))\n\nSparse solve:  0.3 ms\n\ncat(sprintf(\"INLA:          %.1f ms\\n\", t_inla))\n\nINLA:          1646.0 ms\n\ncat(sprintf(\"Speedup:       %.0fx\\n\",   speedup))\n\nSpeedup:       5451x\n\n\nThe explicit sparse solve is 5451x faster (0.3 ms vs 1646.0 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known."
+    "text": "4.4 Timing\n\ntime_explicit &lt;- microbenchmark(\n  as.vector(A_pred %*% Matrix::solve(K_spde, AtRinvy)),\n  times = 50\n)\n\ntime_inla &lt;- microbenchmark(\n  inla(y ~ -1 + f(spatial_idx, model = spde),\n       data              = inla.stack.data(stk),\n       family            = \"gaussian\",\n       control.predictor = list(A = inla.stack.A(stk), compute = TRUE),\n       control.family    = list(\n         hyper = list(prec = list(initial = log(1/sigma2_e), fixed = TRUE))\n       ),\n       control.inla    = list(int.strategy = \"eb\"),\n       control.compute = list(config = TRUE)),\n  times = 10\n)\n\nt_explicit &lt;- median(time_explicit$time) / 1e6\nt_inla     &lt;- median(time_inla$time)     / 1e6\nspeedup    &lt;- t_inla / t_explicit\n\ncat(sprintf(\"Sparse solve:  %.1f ms\\n\", t_explicit))\n\nSparse solve:  0.3 ms\n\ncat(sprintf(\"INLA:          %.1f ms\\n\", t_inla))\n\nINLA:          1755.3 ms\n\ncat(sprintf(\"Speedup:       %.0fx\\n\",   speedup))\n\nSpeedup:       5365x\n\n\nThe explicit sparse solve is 5365x faster (0.3 ms vs 1755.3 ms). INLA’s overhead comes from hyperparameter estimation and Laplace approximation — useful for full Bayesian inference, unnecessary when parameters are treated as known."
   },
   {
     "objectID": "posts/kriging-gp-equivalence/index.html#results",
@@ -677,12 +663,5 @@
     "title": "Writing",
     "section": "",
     "text": "A kriging competition\n\n\n\n\n\nA survey of scalable Gaussian process methods, organized around the Heaton et al. (2019) comparison paper.\n\n\n\n\n\nMay 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nArea-to-area kriging with basis functions\n\n\n\n\n\nSatellite observations are areal averages, not point measurements. Basis function methods reduce the intractable double-integral problem of area-to-area kriging to a single pass of cheap single integrals — provided the prior is chosen cleverly.\n\n\n\n\n\nMay 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nKriging is Bayesian Linear Regression\n\n\n\n\n\nA unified view of kriging, GP regression, and spatial basis function methods\n\n\n\n\n\nMay 6, 2026\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "cv.html#software-developed",
-    "href": "cv.html#software-developed",
-    "title": "Russell Goebel",
-    "section": "Software Developed",
-    "text": "Software Developed\nCRAN Packages\n\nVisitorCounts — Modeling and forecasting of park visitor counts using social media data and on-site counts. Decomposes trend and seasonal components via Singular Spectrum Analysis to produce short-term forecasts and percent-change estimates. CRAN\n\nResearch Packages\n\nfastblm — Fast Bayesian linear model fitting for large spatial datasets, using conjugate gradient, Woodbury, or sparse Cholesky methods with optional Lanczos standard errors and support for linear constraints. GitHub\nspatintegrate — Integrates functions over spatial geometries (e.g. from the sf package). Useful for constructing spatial design matrices with different bases and for area-to-area kriging. GitHub"
   }
 ]

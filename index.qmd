@@ -1,5 +1,6 @@
 ---
 title: "Russell Goebel"
+comments: false
 ---
 
 I'm a statistician with a PhD from Boston University. I work on Bayesian spatial modeling and have spent several years doing applied consulting across health, life sciences, and other domains.
